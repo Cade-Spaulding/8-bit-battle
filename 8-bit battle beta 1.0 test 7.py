@@ -116,7 +116,8 @@ orenge=(255,120,0)
 #      character formating   [name,colors,gun attack,anti air,strike,kick,punch,HP,jump strength,speed]
 #      jun formtion          [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
 #      anti air format       [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
-characters=[['bit man v.8',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,240,[green,darkGreen],.5,.3,10],[3,15,7,2500,.8,.2,10,50,15],'TBD','TBD','TBD',5,1,.5],['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,12,5,20,1.2,.5,15,35,28],'TBD','TBD','TBD',4,1.5,.7],'TBD','TBD','TBD']
+characters=[['bit man v.8',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,240,[green,darkGreen],.5,.3,10],[3,15,7,46,.8,.2,10,50,15],'TBD','TBD','TBD',5,1,.5],
+            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,12,5,52,1.2,.5,15,35,28],'TBD','TBD','TBD',4,1.5,.7],'TBD','TBD','TBD']
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
 pause=False
