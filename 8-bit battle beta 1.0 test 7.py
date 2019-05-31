@@ -67,7 +67,7 @@ def atac(location):
                     loc[0]+=loc[11][1][2]
                 else:
                     loc[0]-=loc[11][1][2]
-                loc[7]-=loc[11][1][1]
+                loc[7]+=loc[11][1][1]
 def at(attack,stun,types):
     stun[1]=attack
     if types=='laser':
