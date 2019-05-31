@@ -12,6 +12,7 @@ storyMode=False
 pc='continue'
 die=[False,'no']
 antiAir=[]
+strike=[]
 def laserHit(person,check,die):
     if not person[2]=='block' and (person[7] <= check[4] and check[4] <= person[7]+50):
             person[9]-=check[5][0]
@@ -40,7 +41,7 @@ def antiAirHit(person,check,die):
     die[1]=None
 def atac(location):
     for loc in location:
-        if loc[11][0]>0:
+        if not loc[11][0]==0:
             if loc[7]==450:
                 loc[5]=False
             loc[11][0]-=1
@@ -57,12 +58,24 @@ def atac(location):
                     antiAir.append([location[0][0],'man',location[0][7]+20,location[0][10][3],location[0][2]])
                 else:
                     antiAir.append([location[1][0],'AI',location[1][7]+20,location[1][10][3],location[1][2]])
+            if loc[11][1]==loc[10][4] and loc[11][0]<=-loc[11][1][3]:
+                if loc[1]=='man':
+                    strike.append([location[0][0],'man',location[0][7]+20,location[0][10][4],location[0][2]])
+                else:
+                    strike.append([location[1][0],'AI',location[1][7]+20,location[1][10][4],location[1][2]])
+                if loc[2]='L':
+                    loc[0]+=loc[11][1][2]
+                else:
+                    loc[0]-=loc[11][1][2]
+                loc[7]-=loc[11][1][1]
 def at(attack,stun,types):
     stun[1]=attack
     if types=='laser':
         stun[0]=attack[4]+attack[5]
     elif types=='antiAir':
         stun[0]=attack[1]+attack[2]+attack[3]
+    elif types=='strike':
+        stun[0]=-1
 def createGuy(person):
     if pause:
         if person[1]=='man' or not person[10]==location[0][10]:
@@ -116,8 +129,9 @@ orenge=(255,120,0)
 #      character formating   [name,colors,gun attack,anti air,strike,kick,punch,HP,jump strength,speed]
 #      jun formtion          [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
 #      anti air format       [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
-characters=[['bit man v.8',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,240,[green,darkGreen],.5,.3,10],[3,19,7,48,.8,.2,10,50,15],'TBD','TBD','TBD',5,1,.5],
-            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,5,52,1.2,.5,15,35,28],'TBD','TBD','TBD',4,1.5,.7],'TBD','TBD','TBD']
+#      strike formating      [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
+characters=[['bit man v.8',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,240,[green,darkGreen],.5,.3,10],[3,19,7,48,.8,.2,10,50,15],[2,.3,.3,15,72,.35,.1,.32,.15,65],'TBD','TBD',5,1,.5],
+            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,5,52,1.2,.5,15,35,28],[3,.6,.09,20,80,.25,.6,.24,.7],'TBD','TBD',4,1.5,.7],'TBD','TBD','TBD']
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
 pause=False
@@ -172,6 +186,7 @@ while True:
                         location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
         storyMode=False
     if inAGame and not end and not pause:
+        strike=[]
         antiAir=[]
         if ti==0:
             location[0][9]=location[0][10][7]
@@ -358,7 +373,7 @@ while True:
                         location[0][5]=True
                         location[0][2]='R'
                     if event.key==K_SPACE:
-                       if not location[0][2]=='block' and not location[0][2]==None and location[0][8]==250 and location[0][11][0]==0:
+                       if not location[0][2]=='block' and not location[0][2]==None and location[0][11][0]==0:
                            at(location[0][10][2],location[0][11],'laser')
                            #lasers.append([location[0][0],location[0][2],0,'man',location[0][7]+20,location[0][10][2]])
                            location[0][3]-=1
@@ -370,10 +385,13 @@ while True:
                        location[0][2]='block'
                     if event.key==K_UP and location[0][7]==450:
                         location[0][6]=location[0][10][8]
-                    if event.key==K_v:
+                    if event.key==K_n and location[0][7]==450:
                         if not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0 and location[0][7]==450:
                            at(location[0][10][3],location[0][11],'antiAir')
                            location[0][5]=False
+                    elif event.key==K_n:
+                        if not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0 and location[0][7]==450:
+                           at(location[0][10][3],location[0][11],'strike')
                 if difficulty=='PvP' and location[1][11][0]==0:
                     if event.key==K_a:
                         location[1][5]=True
