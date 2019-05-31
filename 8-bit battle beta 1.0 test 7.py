@@ -93,7 +93,7 @@ def createGuy(person):
             direction=-45
         else:
             direction=15
-        if person[11][0]==0:
+        if person[11][0]==0 or person[11][1]==person[10][4]:
             pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*3/5-15,person[7]+15,20,20),10)
         elif person[11][1]==person[10][2]:
             direction+=ori[0]
