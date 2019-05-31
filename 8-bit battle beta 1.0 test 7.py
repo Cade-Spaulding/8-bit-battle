@@ -63,7 +63,7 @@ def atac(location):
                     strike.append([location[0][0],'man',location[0][7]+20,location[0][10][4],location[0][2]])
                 else:
                     strike.append([location[1][0],'AI',location[1][7]+20,location[1][10][4],location[1][2]])
-                if loc[2]='L':
+                if loc[2]=='L':
                     loc[0]+=loc[11][1][2]
                 else:
                     loc[0]-=loc[11][1][2]
