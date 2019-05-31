@@ -427,7 +427,7 @@ while True:
                     if event.key==K_d and location[1][2]=='R' and not Lift:
                         location[1][5]=False
         for movement in location:
-            if movement[11][1]==movement[10][4] and movememt[11][0]>=(-1*movement[11][1][3]):
+            if not movement[11][1]==movement[10][4] and not movememt[11][0]>=(-1*movement[11][1][3]):
                 if movement[5]:
                     if movement[2]=='L':
                         movement[0]-=movement[10][9]
