@@ -319,7 +319,7 @@ while True:
         for check in strike:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] check[2]+5>person[7] and check[2]-5>person[7]:
+                    if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5>person[7]:
                         if person[11][1]==person[10][4] and person[2]=='L':
                             person[11]=[person[11][1][4],['stun',person[11][1][6],person[11][1][5]]]
                         elif person[11][1]==person[10][4]:
@@ -330,7 +330,7 @@ while True:
                             dead=die[1]
                         
                 else:
-                    if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1]:
+                    if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5>person[7]:
                         if person[11][1]==person[10][4] and person[2]=='L':
                             person[11]=[person[11][1][4],['stun',person[11][1][6],person[11][1][5]]]
                         elif person[11][1]==person[10][4]:
