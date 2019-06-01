@@ -26,11 +26,24 @@ def laserHit(person,check,die):
                 return None
     die[0]=False
     die[1]=None
+def strikeHit(person,check,die):
+    if not person[2]=='block':
+            person[9]-=check[5][0]
+            person[11][0]=check[5][9]
+            person[11][1]=['stun',check[5][8],check[5][7]]
+            if check[1]=='R':
+                person[11][1][1]*=-1
+            if person[9]<=0:
+                die[0]=True
+                die[1]=person[1]
+                return None
+    die[0]=False
+    die[1]=None
 def antiAirHit(person,check,die):
     if not person[2]=='block' and (person[7] <= check[2] and check[2] >= person[7]-check[3][7]):
             person[9]-=check[3][0]
             person[11][0]=check[3][6]
-            person[11][1]=['stun',check[3][5],check[3][4]]
+            person[11][1]=['stun',check[3][4],check[3][3]]
             if check[4]=='R':
                 person[11][1][1]*=-1
             if person[9]<=0:
