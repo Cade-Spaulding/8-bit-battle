@@ -438,8 +438,8 @@ while True:
                         movement[0]-=movement[10][9]
                     elif movement[2]=='R':
                         movement[0]+=movement[10][9]
-            movement[7]-=movement[6]
-            movement[6]-=.01
+                movement[7]-=movement[6]
+                movement[6]-=.01
             if movement[7]>=450 and movement[6]<=0:
                     movement[6]=0
                     movement[7]=450
