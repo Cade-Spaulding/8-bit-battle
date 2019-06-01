@@ -28,9 +28,9 @@ def laserHit(person,check,die):
     die[1]=None
 def strikeHit(person,check,die):
     if not person[2]=='block':
-            person[9]-=check[5][0]
-            person[11][0]=check[5][9]
-            person[11][1]=['stun',check[5][8],check[5][7]]
+            person[9]-=check[3][0]
+            person[11][0]=check[3][9]
+            person[11][1]=['stun',check[3][8],check[3][7]]
             if check[1]=='R':
                 person[11][1][1]*=-1
             if person[9]<=0:
