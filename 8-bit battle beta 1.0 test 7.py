@@ -460,7 +460,7 @@ while True:
                            at(location[1][10][4],location[1][11],'strike')
                            location[1][5]=False
                     if event.key==K_w and location[1][7]==450:
-                        location[1][6]=1
+                        location[1][6]=location[1][10][8]
                     if event.key==K_s and location[1][4]<=0:
                         location[1][2]='block'
             if event.type==KEYUP:
