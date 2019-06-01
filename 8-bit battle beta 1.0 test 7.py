@@ -691,6 +691,7 @@ while True:
                     ti=0
                     if mode=='char1':
                         location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                        mode='char2'
                     if mode=='char2':
                         location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
                         difficulty='PvP'
