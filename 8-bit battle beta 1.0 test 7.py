@@ -44,6 +44,8 @@ def atac(location):
         if not loc[11][0]==0:
             if loc[7]==450:
                 loc[5]=False
+                if loc[11][1]==loc[10][4]:
+                    loc[11]=[loc[11][4],['stun',loc[11][6],loc[11][5]
             loc[11][0]-=1
             if loc[11][1][0]=='stun':
                 loc[0]-=loc[11][1][1]
@@ -189,8 +191,8 @@ while True:
         strike=[]
         antiAir=[]
         if ti==0:
-            location[0][9]=location[0][10][7]
-            location[1][9]=location[1][10][7]
+            location[0][9]=location[0][10][7]*4
+            location[1][9]=location[1][10][7]*4
             ti+=1
         atac(location)
         windowSurface.fill(white)
