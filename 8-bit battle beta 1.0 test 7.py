@@ -644,6 +644,31 @@ while True:
             textRect.centerx=550
             textRect.centery=300
             windowSurface.blit(text,textRect)
+        elif mode=='char1' or mode=='char2':
+            if choise==1:
+                text=basicFont.render(str(caracters[0]),True,blue,yellow)
+            else:
+                text=basicFont.render(str(caracters[0]),True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=140
+            textRect.centery=300
+            windowSurface.blit(text,textRect)
+            if choise==2:
+                text=basicFont.render(str(caracters[1]),True,blue,yellow)
+            else:
+                text=basicFont.render(str(caracters[1]),True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=280
+            textRect.centery=300
+            windowSurface.blit(text,textRect)
+            if choise==3:
+                text=basicFont.render(str(caracters[2]),True,blue,yellow)
+            else:
+                text=basicFont.render(str(caracters[2]),True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=420
+            textRect.centery=300
+            windowSurface.blit(text,textRect)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type==QUIT:
@@ -664,11 +689,17 @@ while True:
                         choise=3
                 if event.key==K_RETURN:
                     ti=0
+                    if mode=='char1':
+                        location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                    if mode=='char2':
+                        location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                        difficulty='PvP'
+                        mode='select'
+                        inAGame=True
                     if mode=='select':
                         if choise==1:
                             difficulty='PvP'
-                            inAGame=True
-                            mode='select'
+                            mode='char1'
                         elif choise==2:
                             mode='quick play'
                         elif choise==3:
