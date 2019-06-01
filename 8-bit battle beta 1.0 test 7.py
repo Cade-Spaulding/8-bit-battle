@@ -147,7 +147,7 @@ orenge=(255,120,0)
 #      jun formtion          [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
 #      anti air format       [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
 #      strike formating      [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
-characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,240,[green,darkGreen],.5,.3,10],[3,19,7,48,.8,.2,10,50,32],[2,.6,.6,15,72,.35,.1,.32,.15,65],'TBD','TBD',5.0,1.25,.5],
+characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,240,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,72,.35,.1,.18,.59,65],'TBD','TBD',5.0,1.25,.5],
             ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,5,52,1.2,.5,15,35,53],[3,1.2,.18,20,80,.25,.6,.24,.7,72],'TBD','TBD',4.0,1.675,.688],
             ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,135,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],'TBD','TBD',2.75,1.35,.58],'TBD','TBD']
 t=0
