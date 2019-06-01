@@ -396,6 +396,7 @@ while True:
                     elif event.key==K_n:
                         if not location[0][2]=='block' and not location[0][2]==None and location[0][11][0]==0:
                            at(location[0][10][4],location[0][11],'strike')
+                           location[0][5]=False
                 if difficulty=='PvP' and location[1][11][0]==0:
                     if event.key==K_a:
                         location[1][5]=True
