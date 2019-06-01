@@ -699,7 +699,7 @@ while True:
                         mode='select'
                         choise=1
                         inAGame=True
-                    if mode=='select':
+                    elif mode=='select':
                         if choise==1:
                             difficulty='PvP'
                             mode='char1'
