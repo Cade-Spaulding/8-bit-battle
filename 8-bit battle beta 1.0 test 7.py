@@ -316,6 +316,29 @@ while True:
                         death=die[0]
                         if death:
                             dead=die[1]
+        for check in strike:
+            for person in location:
+                if check[4]=='R':
+                    if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] check[2]+5>person[7] and check[2]-5>person[7]:
+                        if person[11][1]==person[10][4] and person[2]=='L':
+                            person[11]=[person[11][1][4],['stun',person[11][1][6],person[11][1][5]]]
+                        elif person[11][1]==person[10][4]:
+                            person[11]=[person[11][1][4],['stun',-person[11][1][6],person[11][1][5]]]
+                        strikeHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
+                        
+                else:
+                    if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1]:
+                        if person[11][1]==person[10][4] and person[2]=='L':
+                            person[11]=[person[11][1][4],['stun',person[11][1][6],person[11][1][5]]]
+                        elif person[11][1]==person[10][4]:
+                            person[11]=[person[11][1][4],['stun',-person[11][1][6],person[11][1][5]]]
+                        strikeHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
         for perkon in location:
                 if (perkon[0]<50 or perkon[0]>680) and perkon[7]==450:
                     death=True
