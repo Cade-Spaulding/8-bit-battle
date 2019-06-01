@@ -331,27 +331,28 @@ while True:
                             dead=die[1]
         for check in strike:
             for person in location:
-                if check[4]=='R':
-                    if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5>person[7]:
-                        if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
-                            pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
-                        elif pernon[11][1]==pernon[10][4]:
-                            pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
-                        strikeHit(person,check,die)
-                        death=die[0]
-                        if death:
-                            dead=die[1]
-                        
-                else:
-                    if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5>person[7]:
-                        if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
-                            pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
-                        elif pernon[11][1]==pernon[10][4]:
-                            pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
-                        strikeHit(person,check,die)
-                        death=die[0]
-                        if death:
-                            dead=die[1]
+                for pernon in location:
+                    if check[4]=='R':
+                        if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5>person[7]:
+                            if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
+                                pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
+                            elif pernon[11][1]==pernon[10][4]:
+                                pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
+                            strikeHit(person,check,die)
+                            death=die[0]
+                            if death:
+                                dead=die[1]
+
+                    else:
+                        if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5>person[7]:
+                            if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
+                                pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
+                            elif pernon[11][1]==pernon[10][4]:
+                                pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
+                            strikeHit(person,check,die)
+                            death=die[0]
+                            if death:
+                                dead=die[1]
         for perkon in location:
                 if (perkon[0]<50 or perkon[0]>680) and perkon[7]==450:
                     death=True
