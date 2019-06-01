@@ -60,15 +60,15 @@ def atac(location):
                     antiAir.append([location[0][0],'man',location[0][7]+20,location[0][10][3],location[0][2]])
                 else:
                     antiAir.append([location[1][0],'AI',location[1][7]+20,location[1][10][3],location[1][2]])
-            if loc[11][1]==loc[10][4] and loc[11][0]>=(-1*loc[11][1][3]):
+            if loc[11][1]==loc[10][4] and loc[11][0]<=(-1*loc[11][1][3]):
                 if loc[1]=='man':
                     strike.append([location[0][0],'man',location[0][7]+20,location[0][10][4],location[0][2]])
                 else:
                     strike.append([location[1][0],'AI',location[1][7]+20,location[1][10][4],location[1][2]])
                 if loc[2]=='L':
-                    loc[0]+=loc[11][1][2]
-                else:
                     loc[0]-=loc[11][1][2]
+                else:
+                    loc[0]+=loc[11][1][2]
                 loc[7]+=loc[11][1][1]
 def at(attack,stun,types):
     stun[1]=attack
