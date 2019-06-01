@@ -646,25 +646,25 @@ while True:
             windowSurface.blit(text,textRect)
         elif mode=='char1' or mode=='char2':
             if choise==1:
-                text=basicFont.render(str(caracters[0]),True,blue,yellow)
+                text=basicFont.render(caracters[0][0],True,blue,yellow)
             else:
-                text=basicFont.render(str(caracters[0]),True,blue,white)
+                text=basicFont.render(caracters[0][0],True,blue,white)
             textRect=text.get_rect()
             textRect.centerx=140
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==2:
-                text=basicFont.render(str(caracters[1]),True,blue,yellow)
+                text=basicFont.render(caracters[1][0],True,blue,yellow)
             else:
-                text=basicFont.render(str(caracters[1]),True,blue,white)
+                text=basicFont.render(caracters[1][0],True,blue,white)
             textRect=text.get_rect()
             textRect.centerx=280
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==3:
-                text=basicFont.render(str(caracters[2]),True,blue,yellow)
+                text=basicFont.render(caracters[2][0],True,blue,yellow)
             else:
-                text=basicFont.render(str(caracters[2]),True,blue,white)
+                text=basicFont.render(caracters[2][0],True,blue,white)
             textRect=text.get_rect()
             textRect.centerx=420
             textRect.centery=300
