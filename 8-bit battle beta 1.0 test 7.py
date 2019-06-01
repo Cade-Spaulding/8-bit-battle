@@ -644,7 +644,7 @@ while True:
             textRect.centerx=550
             textRect.centery=300
             windowSurface.blit(text,textRect)
-        elif mode=='char1' or mode=='char2':
+        if mode=='char1' or mode=='char2':
             if choise==1:
                 text=basicFont.render(caracters[0][0],True,blue,yellow)
             else:
