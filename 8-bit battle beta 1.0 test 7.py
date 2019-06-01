@@ -31,7 +31,7 @@ def strikeHit(person,check,die):
             person[9]-=check[3][0]
             person[11][0]=check[3][9]
             person[11][1]=['stun',check[3][8],check[3][7]]
-            if check[1]=='R':
+            if check[4]=='R':
                 person[11][1][1]*=-1
             if person[9]<=0:
                 die[0]=True
