@@ -451,9 +451,13 @@ while True:
                            location[1][3]-=1
                            location[1][8]=0
                            ori[1]=15
-                    if event.key==K_1:
+                    if event.key==K_1 and location[1][7]==450:
                         if not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0 and location[1][7]==450:
                            at(location[1][10][3],location[1][11],'antiAir')
+                           location[1][5]=False
+                    elif event.key==K_1:
+                        if not location[1][2]=='block' and not location[1][2]==None and location[1][11][0]==0:
+                           at(location[1][10][4],location[1][11],'strike')
                            location[1][5]=False
                     if event.key==K_w and location[1][7]==450:
                         location[1][6]=1
@@ -805,7 +809,7 @@ while True:
                 if event.key==K_RETURN:
                     end=False
                     inAGame=False
-                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[0],[0,None]]]
+                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]]]
                     lasers=[]
     for event in pygame.event.get():
         if event.type==QUIT:
