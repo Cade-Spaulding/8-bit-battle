@@ -45,7 +45,7 @@ def atac(location):
             if loc[7]==450:
                 loc[5]=False
                 if loc[11][1]==loc[10][4]:
-                    loc[11]=[loc[11][4],['stun',loc[11][6],loc[11][5]
+                    loc[11]=[loc[11][4],['stun',loc[11][6],loc[11][5]]
             loc[11][0]-=1
             if loc[11][1][0]=='stun':
                 loc[0]-=loc[11][1][1]
