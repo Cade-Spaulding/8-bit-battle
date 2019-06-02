@@ -334,7 +334,7 @@ while True:
             for person in location:
                 for pernon in location:
                     if check[4]=='L' and not pernon==person:
-                        if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
+                        if person[0]<=check[0] and person[0]>=check[0]-50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
                             if pernon[11][1]==pernon[10][4] and pernon[2]=='R':
                                 pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
                             elif pernon[11][1]==pernon[10][4]:
@@ -345,7 +345,7 @@ while True:
                                 dead=die[1]
 
                     elif not pernon==person:
-                        if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
+                        if person[0]>=check[0] and person[0]<=check[0]+50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
                             if pernon[11][1]==pernon[10][4] and pernon[2]=='R':
                                 pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
                             elif pernon[11][1]==pernon[10][4]:
