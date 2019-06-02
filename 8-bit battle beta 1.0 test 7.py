@@ -57,7 +57,7 @@ def atac(location):
         if not loc[11][0]==0:
             if loc[7]==450:
                 loc[5]=False
-                if loc[11][1]==loc[10][4] and loc[2]=='R':
+                if loc[11][1]==loc[10][4] and loc[2]=='L':
                     loc[11]=[loc[11][1][4],['stun',loc[11][1][6],loc[11][1][5]]]
                 elif loc[11][1]==loc[10][4]:
                     loc[11]=[loc[11][1][4],['stun',-loc[11][1][6],loc[11][1][5]]]
@@ -335,7 +335,7 @@ while True:
                 for pernon in location:
                     if check[4]=='R' and not pernon==person:
                         if person[0]<=check[0]+50 and person[0]>=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
-                            if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
+                            if pernon[11][1]==pernon[10][4] and pernon[2]=='R':
                                 pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
                             elif pernon[11][1]==pernon[10][4]:
                                 pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
@@ -346,7 +346,7 @@ while True:
 
                     elif not pernon==person:
                         if person[0]>=check[0]-50 and person[0]<=check[0] and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
-                            if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
+                            if pernon[11][1]==pernon[10][4] and pernon[2]=='R':
                                 pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
                             elif pernon[11][1]==pernon[10][4]:
                                 pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
