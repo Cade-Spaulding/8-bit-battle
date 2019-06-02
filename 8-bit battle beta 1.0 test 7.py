@@ -89,7 +89,7 @@ def at(attack,stun,types):
     stun[1]=attack
     if types=='laser':
         stun[0]=attack[4]+attack[5]
-    elif types=='antiAir':
+    elif types=='antiAir' or types=='normal':
         stun[0]=attack[1]+attack[2]+attack[3]
     elif types=='strike':
         stun[0]=-1
@@ -126,6 +126,8 @@ def createGuy(person):
                 pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*3/5-15,person[7]+15-(person[11][1][7]*(person[11][1][1]+person[11][1][2]+person[11][1][3]-person[11][0])/person[11][1][1]),20,20),10)
             elif person[11][0]<=person[11][1][1]+person[11][1][2]:
                 pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*3/5-15,person[7]+15-(person[11][1][7]),20,20),10)
+        elif person[11][1]==person[10][5]:
+            pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*1.2-15,person[7]+45,20,20),10)
     if person[2]=='block':
         pygame.draw.ellipse(windowSurface,black,(person[0]-16,person[7]+18,20,20),10)
 windowSurface=pygame.display.set_mode((700,600),0,32)
@@ -147,9 +149,10 @@ orenge=(255,120,0)
 #      jun formtion          [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
 #      anti air format       [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
 #      strike formating      [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
-characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,72,.35,.1,.18,.59,65],'TBD','TBD',6.25,1.25,.5],
-            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],'TBD','TBD',5.5,1.675,.688],
-            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,380,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],'TBD','TBD',2.75,1.35,.58],'TBD','TBD']
+#      nutral formating      [damage,start up,active,endlag,y knockback,x knockback,hitstun,range]
+characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,72,.35,.1,.18,.59,65],[3,16,1,5,.9,.9,19,88],'TBD',6.25,1.25,.5],
+            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,98],'TBD',5.5,1.675,.688],
+            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,380,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,105],'TBD',2.75,1.35,.58],'TBD','TBD']
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
 pause=False
@@ -216,7 +219,6 @@ while True:
         pygame.draw.polygon(windowSurface,black,((650,600),(50,600),(50,500),(650,500)))
         createGuy(location[0])
         createGuy(location[1])
-
         for l in lasers:
             if l[1]=='R':
                 l[0]=l[0]+l[5][1]
@@ -445,11 +447,9 @@ while True:
                         location[1][2]='R'
                         Lift=True
                     if event.key==K_TAB:
-                       if not location[1][2]=='block' and not location[0][2]==None and location[1][8]==250:
+                       if not location[1][2]=='block' and not location[0][2]==None and location[1][11][0]==0:
                            at(location[1][10][2],location[1][11],'laser')
-                           #lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20])
-                           location[1][3]-=1
-                           location[1][8]=0
+                           #lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20]
                            ori[1]=15
                     if event.key==K_1 and location[1][7]==450:
                         if not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0 and location[1][7]==450:
@@ -457,8 +457,15 @@ while True:
                            location[1][5]=False
                     elif event.key==K_1:
                         if not location[1][2]=='block' and not location[1][2]==None and location[1][11][0]==0:
-                           at(location[1][10][4],location[1][11],'strike')
+                           at(location[1][10][4],lo[1][11],'strike')
                            location[1][5]=False
+                    if event.key==K_2 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
+                        if loction[1][5]:
+                           at(location[1][10][5],location[1][11],'normal')
+                           if location[1][7]==450:
+                                location[1][5]=False
+                        else:
+                            at(location[1][10][6],location[1][11],'normal')
                     if event.key==K_w and location[1][7]==450:
                         location[1][6]=location[1][10][8]
                     if event.key==K_s and location[1][4]<=0:
