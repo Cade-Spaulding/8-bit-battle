@@ -148,7 +148,7 @@ def createGuy(person):
         elif person[11][1]==person[10][5]:
             pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*2.8-15,person[7]+45,20,20),10)
         elif person[11][1]==person[10][6]:
-            pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*2.8-15,person[7]+15,20,20),10)
+            pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*1.2-15,person[7]+15,20,20),10)
     if person[2]=='block':
         pygame.draw.ellipse(windowSurface,black,(person[0]-16,person[7]+18,20,20),10)
 windowSurface=pygame.display.set_mode((700,600),0,32)
