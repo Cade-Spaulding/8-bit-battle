@@ -381,7 +381,7 @@ while True:
         for check in normal:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1]:
+                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0]-check[3][7] and not check[1]==person[1]:
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         normalHit(person,check,die)
