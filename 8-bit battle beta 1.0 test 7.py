@@ -101,9 +101,9 @@ def atac(location):
                 loc[7]+=loc[11][1][1]
             if (loc[11][1]==loc[10][5] or loc[11][1]==loc[10][6]) and loc[11][0]>=loc[11][1][3] and loc[11][0]<=loc[11][1][3]+loc[11][1][2]:
                 if loc[1]=='man':
-                    normal.append([location[0][0],'man',location[0][7]+20,location[0][10][3],location[0][2]])
+                    normal.append([location[0][0],'man',location[0][7]+20,location[0][11][1],location[0][2]])
                 else:
-                    normal.append([location[1][0],'AI',location[1][7]+20,location[1][10][3],location[1][2]])
+                    normal.append([location[1][0],'AI',location[1][7]+20,location[1][11][1],location[1][2]])
 def at(attack,stun,types):
     stun[1]=attack
     if types=='laser':
@@ -381,7 +381,7 @@ while True:
         for check in normal:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0]-check[3][7] and not check[1]==person[1]:
+                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1]:
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         normalHit(person,check,die)
