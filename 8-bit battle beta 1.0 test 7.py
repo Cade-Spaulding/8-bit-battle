@@ -13,6 +13,7 @@ pc='continue'
 die=[False,'no']
 antiAir=[]
 strike=[]
+normal=[]
 def laserHit(person,check,die):
     if not person[2]=='block' and (person[7] <= check[4] and check[4] <= person[7]+50):
             person[9]-=check[5][0]
@@ -41,6 +42,19 @@ def strikeHit(person,check,die):
     die[1]=None
 def antiAirHit(person,check,die):
     if not person[2]=='block' and (person[7] <= check[2] and check[2] >= person[7]-check[3][7]):
+            person[9]-=check[3][0]
+            person[11][0]=check[3][6]
+            person[11][1]=['stun',check[3][5],check[3][4]]
+            if check[4]=='R':
+                person[11][1][1]*=-1
+            if person[9]<=0:
+                die[0]=True
+                die[1]=person[1]
+                return None
+    die[0]=False
+    die[1]=None
+def normalHit(person,check,die):
+    if not person[2]=='block' and (person[7] <= check[2] and check[2] >= person[7]-25):
             person[9]-=check[3][0]
             person[11][0]=check[3][6]
             person[11][1]=['stun',check[3][5],check[3][4]]
@@ -85,6 +99,11 @@ def atac(location):
                 else:
                     loc[0]+=loc[11][1][2]
                 loc[7]+=loc[11][1][1]
+            if (loc[11][1]==loc[10][5] or loc[11][1]==loc[10][6]) and loc[11][0]>=loc[11][1][3] and loc[11][0]<=loc[11][1][3]+loc[11][1][2]:
+                if loc[1]=='man':
+                    normal.append([location[0][0],'man',location[0][7]+20,location[0][10][3],location[0][2]])
+                else:
+                    normal.append([location[1][0],'AI',location[1][7]+20,location[1][10][3],location[1][2]])
 def at(attack,stun,types):
     stun[1]=attack
     if types=='laser':
@@ -211,6 +230,7 @@ while True:
     if inAGame and not end and not pause:
         strike=[]
         antiAir=[]
+        normal=[]
         if ti==0:
             location[0][9]=location[0][10][7]*4
             location[1][9]=location[1][10][7]*4
@@ -358,6 +378,25 @@ while True:
                             death=die[0]
                             if death:
                                 dead=die[1]
+        for check in normal:
+            for person in location:
+                if check[4]=='R':
+                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1]:
+                        location[0][11][1]=['stun',0,0]
+                        location[1][11][1]=['stun',0,0]
+                        normalHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
+                        
+                else:
+                    if person[0]>=check[0]-check[3][7] and person[0]<=check[0] and not check[1]==person[1]:
+                        location[0][11][1]=['stun',0,0]
+                        location[1][11][1]=['stun',0,0]
+                        normalHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
         for perkon in location:
                 if (perkon[0]<50 or perkon[0]>680) and perkon[7]==450:
                     death=True
