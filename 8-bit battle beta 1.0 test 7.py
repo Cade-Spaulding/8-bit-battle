@@ -1,38 +1,159 @@
-import pygame,sys,time
+import pygame,sys,time,random
 from pygame.locals import*
+stoPt='School'
 pygame.init()
+lives=3
+ori=[0,0]
 choise=1
 ti=0
 mode='select'
-stoPt='School'
-lives=3
 progress=0
 storyMode=False
 pc='continue'
+die=[False,'no']
+antiAir=[]
+strike=[]
+normal=[]
+def laserHit(person,check,die):
+    if not person[2]=='block' and (person[7] <= check[4] and check[4] <= person[7]+50):
+            person[9]-=check[5][0]
+            person[11][0]=check[5][9]
+            person[11][1]=['stun',check[5][8],check[5][7]]
+            if check[1]=='R':
+                person[11][1][1]*=-1
+            if person[9]<=0:
+                die[0]=True
+                die[1]=person[1]
+                return None
+    die[0]=False
+    die[1]=None
+def strikeHit(person,check,die):
+    if not person[2]=='block':
+            person[9]-=check[3][0]
+            person[11][0]=check[3][9]
+            person[11][1]=['stun',check[3][8],check[3][7]]
+            if check[4]=='R':
+                person[11][1][1]*=-1
+            if person[9]<=0:
+                die[0]=True
+                die[1]=person[1]
+                return None
+    die[0]=False
+    die[1]=None
+def antiAirHit(person,check,die):
+    if not person[2]=='block' and (person[7] <= check[2] and check[2] >= person[7]-check[3][7]):
+            person[9]-=check[3][0]
+            person[11][0]=check[3][6]
+            person[11][1]=['stun',check[3][5],check[3][4]]
+            if check[4]=='R':
+                person[11][1][1]*=-1
+            if person[9]<=0:
+                die[0]=True
+                die[1]=person[1]
+                return None
+    die[0]=False
+    die[1]=None
+def normalHit(person,check,die):
+    if not person[2]=='block' and (person[7] <= check[2] and check[2] >= person[7]-25):
+            person[9]-=check[3][0]
+            person[11][0]=check[3][6]
+            person[11][1]=['stun',check[3][5],check[3][4]]
+            if check[4]=='R':
+                person[11][1][1]*=-1
+            if person[9]<=0:
+                die[0]=True
+                die[1]=person[1]
+                return None
+    die[0]=False
+    die[1]=None
+def atac(location):
+    for loc in location:
+        if not loc[11][0]==0:
+            if loc[7]==450:
+                loc[5]=False
+                if loc[11][1]==loc[10][4] and loc[2]=='L':
+                    loc[11]=[loc[11][1][4],['stun',loc[11][1][6],loc[11][1][5]]]
+                elif loc[11][1]==loc[10][4]:
+                    loc[11]=[loc[11][1][4],['stun',-loc[11][1][6],loc[11][1][5]]]
+            loc[11][0]-=1
+            if loc[11][1][0]=='stun':
+                loc[0]-=loc[11][1][1]
+                loc[7]-=loc[11][1][2]
+            if loc[11][1]==loc[10][2] and loc[11][0]==loc[11][1][5]:
+                if loc[1]=='man':
+                    lasers.append([location[0][0],location[0][2],0,'man',location[0][7]+20,location[0][10][2]])
+                else:
+                    lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20,location[1][10][2]])
+            if loc[11][1]==loc[10][3] and loc[11][0]>=loc[11][1][3] and loc[11][0]<=loc[11][1][3]+loc[11][1][2]:
+                if loc[1]=='man':
+                    antiAir.append([location[0][0],'man',location[0][7]+20,location[0][10][3],location[0][2]])
+                else:
+                    antiAir.append([location[1][0],'AI',location[1][7]+20,location[1][10][3],location[1][2]])
+            if loc[11][1]==loc[10][4] and loc[11][0]<=(-1*loc[11][1][3]):
+                if loc[1]=='man':
+                    strike.append([location[0][0],'man',location[0][7]+20,location[0][10][4],location[0][2]])
+                else:
+                    strike.append([location[1][0],'AI',location[1][7]+20,location[1][10][4],location[1][2]])
+                if loc[2]=='L':
+                    loc[0]-=loc[11][1][2]
+                else:
+                    loc[0]+=loc[11][1][2]
+                loc[7]+=loc[11][1][1]
+            if (loc[11][1]==loc[10][5] or loc[11][1]==loc[10][6]) and loc[11][0]>=loc[11][1][3] and loc[11][0]<=loc[11][1][3]+loc[11][1][2]:
+                if loc[1]=='man':
+                    normal.append([location[0][0],'man',location[0][7]+20,location[0][11][1],location[0][2]])
+                else:
+                    normal.append([location[1][0],'AI',location[1][7]+20,location[1][11][1],location[1][2]])
+def at(attack,stun,types):
+    stun[1]=attack
+    if types=='laser':
+        stun[0]=attack[4]+attack[5]
+    elif types=='antiAir' or types=='normal':
+        stun[0]=attack[1]+attack[2]+attack[3]
+    elif types=='strike':
+        stun[0]=-1
 def createGuy(person):
     if pause:
-        if person[1]=='man':
-            color=darkBlue
+        if person[1]=='man' or not person[10]==location[0][10]:
+            color=person[10][1][1]
         else:
-            color=darkRed
+            color=person[10][1][3]
     else:
-        if person[1]=='man':
-            color=blue
+        if person[1]=='man' or not person[10]==location[0][10]:
+            color=person[10][1][0]
         else:
-            color=red
+            color=person[10][1][2]
     pygame.draw.polygon(windowSurface,color,((person[0]-30,person[7]+50),(person[0],person[7]+50),(person[0],person[7]),(person[0]-30,person[7])))
     if not person[2]=='block' and not person[2]==None:
         if person[2]=='L':
             direction=-45
         else:
             direction=15
-        pygame.draw.polygon(windowSurface,black,((person[0]-15,person[7]+18),(person[0]+direction,person[7]+18),(person[0]+direction,person[7]+22),(person[0]-15,person[7]+22)))
-        pygame.draw.polygon(windowSurface,black,((person[0]-16,person[7]+18),(person[0]-14,person[7]+18),(person[0]-14,person[7]+30),(person[0]-16,person[7]+30)))
+        if person[11][0]==0 or person[11][1]==person[10][4]:
+            pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*3/5-15,person[7]+15,20,20),10)
+        elif person[11][1]==person[10][2]:
+            direction+=ori[0]
+            if person[2]=='AI':
+                direction+=ori[1]
+                ori[1]*=-1
+            else:
+                ori[0]*=-1
+            pygame.draw.polygon(windowSurface,black,((person[0]-15,person[7]+18),(person[0]+direction,person[7]+18),(person[0]+direction,person[7]+22),(person[0]-15,person[7]+22)))
+            pygame.draw.polygon(windowSurface,black,((person[0]-16,person[7]+18),(person[0]-14,person[7]+18),(person[0]-14,person[7]+30),(person[0]-16,person[7]+30)))
+        elif person[11][1]==person[10][3]:
+            if person[11][0]<=person[11][1][1]:
+                pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*3/5-15,person[7]+15-(person[11][1][7]*(person[11][1][1]+person[11][1][2]+person[11][1][3]-person[11][0])/person[11][1][1]),20,20),10)
+            elif person[11][0]<=person[11][1][1]+person[11][1][2]:
+                pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*3/5-15,person[7]+15-(person[11][1][7]),20,20),10)
+        elif person[11][1]==person[10][5]:
+            pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*2.8-15,person[7]+45,20,20),10)
+        elif person[11][1]==person[10][6]:
+            pygame.draw.ellipse(windowSurface,person[10][1][4],(person[0]+direction*1.2-15,person[7]+15,20,20),10)
     if person[2]=='block':
         pygame.draw.ellipse(windowSurface,black,(person[0]-16,person[7]+18,20,20),10)
 windowSurface=pygame.display.set_mode((700,600),0,32)
 pygame.display.set_caption('8-bit Battle')
-location=[[550,'man','L',25,0,False,0,450,250,5],[150,'AI','R',25,0,False,0,450,250,5]]
+
 lasers=[]
 black=(0,0,0)
 grey=(100,100,100)
@@ -44,12 +165,24 @@ yellow=(255,255,0)
 darkRed=(100,0,0)
 darkGreen=(0,50,0)
 darkBlue=(0,0,100)
+orenge=(255,120,0)
+brown=(128,63,0)
+#      character formating                      [name,colors,gun attack,anti air,strike,kick,punch,HP,jump strength,speed]
+#      jun formtion                             [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
+#      anti air format                          [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
+#      strike formating                         [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
+#      nutral formating                         [damage,start up,active,endlag,y knockback,x knockback,hitstun,range]
+characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,72,.35,.1,.18,.59,65],[3,16,1,5,.9,.9,19,188],[1,7,2,5,.55,.43,25,31],6.25,1.25,.5],
+            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,198],[1,10,4,22,.6,1.5,18,12],5.5,1.675,.688],
+            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,380,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58],
+            ['BOT MAN',[red,darkRed,grey,grey,darkBlue],[3,.97,'hi',.08,25,462,[darkGreen,darkGreen],1.6,2.4,43],[5,46,22,76,.8,2.6,52,52,34],[2,1.5,1.95,52,254,.116,.328,.675,.05,63],[4,25,2,31,1.8,2.67,35,106],[3,15,5,18,.9,2.6,31,25],6.25,1.545,.438],
+            ['copy',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35],[3,19,10,10,1.6,.35,41,97,109],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18],[3,18,3,5,.78,.768,56,98],[3,9,4,9,.4,.01,14,23],8.75,1.1,.29]]
 t=0
+location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
 pause=False
 inAGame=False
 end=False
 while True:
-    antiAir=[]
     even=None
     defend=False
     if pause:
@@ -59,7 +192,7 @@ while True:
         createGuy(location[0])
         createGuy(location[1])
         for l in lasers:
-            pygame.draw.line(windowSurface,darkGreen,(l[0],l[4]),(l[0]-25,l[4]))
+            pygame.draw.line(windowSurface,l[5][6][1],(l[0],l[4]),(l[0]-25,l[4]))
         if pc=='continue':
             text=basicFont.render('continue',True,blue,yellow)
         else:
@@ -95,8 +228,17 @@ while True:
                         pause=False
                         inAGame=False
                         pc='continue'
+                        location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
         storyMode=False
     if inAGame and not end and not pause:
+        strike=[]
+        antiAir=[]
+        normal=[]
+        if ti==0:
+            location[0][9]=location[0][10][7]*4
+            location[1][9]=location[1][10][7]*4
+            ti+=1
+        atac(location)
         windowSurface.fill(white)
         pygame.draw.polygon(windowSurface,red,((700,600),(0,600),(0,500,),(700,500)))
         pygame.draw.polygon(windowSurface,black,((650,600),(50,600),(50,500),(650,500)))
@@ -104,10 +246,10 @@ while True:
         createGuy(location[1])
         for l in lasers:
             if l[1]=='R':
-                l[0]=l[0]+1
+                l[0]=l[0]+l[5][1]
             else:
-                l[0]=l[0]-1
-            pygame.draw.line(windowSurface,green,(l[0],l[4]),(l[0]-25,l[4]))
+                l[0]=l[0]-l[5][1]
+            pygame.draw.line(windowSurface,l[5][6][0],(l[0],l[4]),(l[0]-25,l[4]))
         if not difficulty=='PvP':
             action=False
             qwerty=True
@@ -149,13 +291,13 @@ while True:
                     action==True
                     t=0
                 elif (not difficulty==1) and (not location[1][3]==0) and not(location[1][2]==None or location[1][2]=='block') and (t>=.5 or t>=(((10-difficulty)/20))+.3)and location[1][8]==250:
-                    lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20])
+                    at(location[1][10][2],location[1][11],'laser')
                     location[1][8]=0
                     t=0
                     location[1][3]-=1
                     action=True
                 elif difficulty==1 and t>=.6 and not location[1][3]==0 and not (location[1][2]==None or location[1][2]=='block')and location[1][8]==250:
-                    lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20])
+                    at(location[1][10][2],location[1][11],'laser')
                     location[1][8]=0
                     t=0
                     location[1][3]-=1
@@ -178,11 +320,11 @@ while True:
             if x[2]>=1:
                 lasers.remove(x)
             else:
-                x[2]=x[2]+.002
+                x[2]=x[2]+x[5][3]
         death=False
         for n in location:
             if n[2]=='block':
-                if n[4]>=5:
+                if n[4]>=n[10][7]:
                     n[2]=None
                 else:
                     n[4]=n[4]+.035
@@ -190,20 +332,74 @@ while True:
                 n[4]=n[4]-.035
         for check in lasers:
             for person in location:
-                hit=False
-                for n in range(20):
-                    if person[0]==check[0]+n/20:
-                        hit=True
-                if (hit)and(not person[1]==check[3])and(not person[2]=='block')and(person[7] <= check[4] and check[4] <= person[7]+50):
-                    if check[4] <= person[7]+17:
-                        person[9]-=3
-                    elif check[4] <= person[7]+33:
-                        person[9]-=2
-                    else:
-                        person[9]-=1
-                    if person[9]<=0:
-                        death=True
-                        dead=person[1]
+                if person[0]>=check[0]-5 and person[0]<=check[0]+5 and not check[3]==person[1]:
+                    laserHit(person,check,die)
+                    death=die[0]
+                    if death:
+                        dead=die[1]
+                    lasers.remove(check)
+        for check in antiAir:
+            for person in location:
+                if check[4]=='R':
+                    if person[0]<=check[0]+check[3][8] and person[0]>=check[0] and not check[1]==person[1]:
+                        location[0][11][1]=['stun',0,0]
+                        location[1][11][1]=['stun',0,0]
+                        antiAirHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
+                        
+                else:
+                    if person[0]>=check[0]-check[3][8] and person[0]<=check[0] and not check[1]==person[1]:
+                        location[0][11][1]=['stun',0,0]
+                        location[1][11][1]=['stun',0,0]
+                        antiAirHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
+        for check in strike:
+            for person in location:
+                for pernon in location:
+                    if check[4]=='L' and not pernon==person:
+                        if person[0]<=check[0] and person[0]>=check[0]-50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
+                            if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
+                                pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
+                            elif pernon[11][1]==pernon[10][4]:
+                                pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
+                            strikeHit(person,check,die)
+                            death=die[0]
+                            if death:
+                                dead=die[1]
+
+                    elif not pernon==person:
+                        if person[0]>=check[0] and person[0]<=check[0]+50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
+                            if pernon[11][1]==pernon[10][4] and pernon[2]=='R':
+                                pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
+                            elif pernon[11][1]==pernon[10][4]:
+                                pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
+                            strikeHit(person,check,die)
+                            death=die[0]
+                            if death:
+                                dead=die[1]
+        for check in normal:
+            for person in location:
+                if check[4]=='R':
+                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1]:
+                        location[0][11][1]=['stun',0,0]
+                        location[1][11][1]=['stun',0,0]
+                        normalHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
+                        
+                else:
+                    if person[0]>=check[0]-check[3][7] and person[0]<=check[0] and not check[1]==person[1]:
+                        location[0][11][1]=['stun',0,0]
+                        location[1][11][1]=['stun',0,0]
+                        normalHit(person,check,die)
+                        death=die[0]
+                        if death:
+                            dead=die[1]
         for perkon in location:
                 if (perkon[0]<50 or perkon[0]>680) and perkon[7]==450:
                     death=True
@@ -246,32 +442,53 @@ while True:
             windowSurface.blit(text,textRect)
             pygame.display.update()
             end=True
+            inAGame=False
         Lift=False
         for event in pygame.event.get():
             if event.type==QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type==KEYDOWN:
-                if event.key==K_ESCAPE:
-                    pause=True
-                if event.key==K_LEFT:
-                    Lift=True
-                    location[0][5]=True
-                    location[0][2]='L'
-                if event.key==K_RIGHT:
-                    Lift=True
-                    location[0][5]=True
-                    location[0][2]='R'
-                if event.key==K_SPACE:
-                   if not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][8]==250:
-                       lasers.append([location[0][0],location[0][2],0,'man',location[0][7]+20])
-                       location[0][3]-=1
-                       location[0][8]=0
-                if event.key==K_DOWN and location[0][4]<=0:
-                   location[0][2]='block'
-                if event.key==K_UP and location[0][7]==450:
-                    location[0][6]=1
-                if difficulty=='PvP':
+                if location[0][11][0]==0:
+                    if event.key==K_ESCAPE:
+                        pause=True
+                    if event.key==K_LEFT:
+                        Lift=True
+                        location[0][5]=True
+                        location[0][2]='L'
+                    if event.key==K_RIGHT:
+                        Lift=True
+                        location[0][5]=True
+                        location[0][2]='R'
+                    if event.key==K_SPACE:
+                       if not location[0][2]=='block' and not location[0][2]==None and location[0][11][0]==0:
+                           at(location[0][10][2],location[0][11],'laser')
+                           #lasers.append([location[0][0],location[0][2],0,'man',location[0][7]+20,location[0][10][2]])
+                           location[0][3]-=1
+                           location[0][8]=0
+                           ori[0]=1
+                           if location[0][7]==450:
+                               location[0][5]=False
+                    if event.key==K_DOWN and location[0][4]<=0:
+                       location[0][2]='block'
+                    if event.key==K_UP and location[0][7]==450:
+                        location[0][6]=location[0][10][8]
+                    if event.key==K_n and location[0][7]==450:
+                        if not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0 and location[0][7]==450:
+                           at(location[0][10][3],location[0][11],'antiAir')
+                           location[0][5]=False
+                    elif event.key==K_n:
+                        if not location[0][2]=='block' and not location[0][2]==None and location[0][11][0]==0:
+                           at(location[0][10][4],location[0][11],'strike')
+                           location[0][5]=False
+                    if event.key==K_m and not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0:
+                        if location[0][5]:
+                           at(location[0][10][5],location[0][11],'normal')
+                           if location[0][7]==450:
+                                location[0][5]=False
+                        else:
+                            at(location[0][10][6],location[0][11],'normal')
+                if difficulty=='PvP' and location[1][11][0]==0:
                     if event.key==K_a:
                         location[1][5]=True
                         location[1][2]='L'
@@ -281,12 +498,27 @@ while True:
                         location[1][2]='R'
                         Lift=True
                     if event.key==K_TAB:
-                       if not location[1][2]=='block' and not location[1][3]<=0 and not location[0][2]==None and location[1][8]==250:
-                           lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20])
-                           location[1][3]-=1
-                           location[1][8]=0
+                       if not location[1][2]=='block' and not location[0][2]==None and location[1][11][0]==0:
+                           at(location[1][10][2],location[1][11],'laser')
+                           #lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20]
+                           ori[1]=15
+                    if event.key==K_1 and location[1][7]==450:
+                        if not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0 and location[1][7]==450:
+                           at(location[1][10][3],location[1][11],'antiAir')
+                           location[1][5]=False
+                    elif event.key==K_1:
+                        if not location[1][2]=='block' and not location[1][2]==None and location[1][11][0]==0:
+                           at(location[1][10][4],location[1][11],'strike')
+                           location[1][5]=False
+                    if event.key==K_2 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
+                        if location[1][5]:
+                           at(location[1][10][5],location[1][11],'normal')
+                           if location[1][7]==450:
+                                location[1][5]=False
+                        else:
+                            at(location[1][10][6],location[1][11],'normal')
                     if event.key==K_w and location[1][7]==450:
-                        location[1][6]=1
+                        location[1][6]=location[1][10][8]
                     if event.key==K_s and location[1][4]<=0:
                         location[1][2]='block'
             if event.type==KEYUP:
@@ -300,16 +532,17 @@ while True:
                     if event.key==K_d and location[1][2]=='R' and not Lift:
                         location[1][5]=False
         for movement in location:
-            if movement[5]:
-                if movement[2]=='L':
-                    movement[0]-=.5
-                elif movement[2]=='R':
-                    movement[0]+=.5
-            movement[7]-=movement[6]
-            movement[6]-=.01
-            if movement[7]>=450 and movement[6]<=0:
-                movement[6]=0
-                movement[7]=450
+            if not movement[11][1]==movement[10][4]:
+                if movement[5]:
+                    if movement[2]=='L':
+                        movement[0]-=movement[10][9]
+                    elif movement[2]=='R':
+                        movement[0]+=movement[10][9]
+                movement[7]-=movement[6]
+                movement[6]-=.01
+            if movement[7]>=450:
+                    movement[6]=0
+                    movement[7]=450
         if location[0][3]==0 and location[1][3]==0:
             location[0][3]=25
             location[1][3]=25
@@ -460,7 +693,7 @@ while True:
             textRect.centerx=420
             textRect.centery=300
             windowSurface.blit(text,textRect)
-        if not mode=='select':
+        if (not mode=='select') and (not mode=='char1') and (not mode=='char2'):
             if choise==4:
                 text=basicFont.render('back',True,black,yellow)
             else:
@@ -469,29 +702,97 @@ while True:
             textRect.centerx=550
             textRect.centery=300
             windowSurface.blit(text,textRect)
+        if mode=='char1' or mode=='char2':
+            if choise==1:
+                text=basicFont.render(characters[0][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[0][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=140
+            textRect.centery=300
+            windowSurface.blit(text,textRect)
+            if choise==2:
+                text=basicFont.render(characters[1][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[1][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=280
+            textRect.centery=300
+            windowSurface.blit(text,textRect)
+            if choise==3:
+                text=basicFont.render(characters[2][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[2][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=420
+            textRect.centery=300
+            windowSurface.blit(text,textRect)
+            if choise==4:
+                text=basicFont.render(characters[3][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[3][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=210
+            textRect.centery=350
+            windowSurface.blit(text,textRect)
+            if choise==5:
+                text=basicFont.render(characters[4][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[4][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=410
+            textRect.centery=350
+            windowSurface.blit(text,textRect)
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type==QUIT:
                     pygame.quit()
                     sys.exit()
             if event.type==KEYDOWN:
-                if event.key==K_LEFT:
-                    if choise==3 or choise==4:
-                        choise-=1
-                    else:
-                        choise=1
-                if event.key==K_RIGHT:
-                    if choise==1 or choise==2:
-                        choise+=1
-                    elif not mode=='select':
-                        choise=4
-                    else:
-                        choise=3
+                if not (mode=='char1' or mode=='char2'):
+                    if event.key==K_LEFT:
+                        if choise==3 or choise==4:
+                            choise-=1
+                        else:
+                            choise=1
+                    if event.key==K_RIGHT:
+                        if choise==1 or choise==2:
+                            choise+=1
+                        elif not mode=='select':
+                            choise=4
+                        else:
+                            choise=3
+                else:
+                    if event.key==K_LEFT:
+                        if choise==3 or choise==2 or choise==5:
+                           choise-=1
+                    if event.key==K_RIGHT:
+                        if choise==1 or choise==2 or choise==4:
+                            choise+=1
+                    if event.key==K_UP:
+                        if choise==4 or choise==5:
+                            choise-=3
+                    if event.key==K_DOWN:
+                        if choise==1:
+                            choise=4
+                        else:
+                            choise=5
                 if event.key==K_RETURN:
-                    if mode=='select':
+                    ti=0
+                    if mode=='char1':
+                            location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                            mode='char2'
+                            choise=1
+                    elif mode=='char2':
+                            location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                            difficulty='PvP'
+                            mode='select'
+                            choise=1
+                            inAGame=True
+                    elif mode=='select':
                         if choise==1:
                             difficulty='PvP'
-                            inAGame=True
-                            mode='select'
+                            mode='char1'
                         elif choise==2:
                             mode='quick play'
                         elif choise==3:
@@ -632,7 +933,7 @@ while True:
                 if event.key==K_RETURN:
                     end=False
                     inAGame=False
-                    location=[[550,'man','L',25,0,False,0,450,250,5],[150,'AI','R',25,0,False,0,450,250,5]]
+                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]]]
                     lasers=[]
     for event in pygame.event.get():
         if event.type==QUIT:
