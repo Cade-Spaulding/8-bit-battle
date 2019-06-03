@@ -483,7 +483,7 @@ while True:
                            location[0][5]=False
                     if event.key==K_m and not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0:
                         if location[0][5]:
-                           at(location[0][10][5],location[1][11],'normal')
+                           at(location[0][10][5],location[0][11],'normal')
                            if location[0][7]==450:
                                 location[0][5]=False
                         else:
