@@ -290,13 +290,13 @@ while True:
                     action==True
                     t=0
                 elif (not difficulty==1) and (not location[1][3]==0) and not(location[1][2]==None or location[1][2]=='block') and (t>=.5 or t>=(((10-difficulty)/20))+.3)and location[1][8]==250:
-                    lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20])
+                    at(location[0][10][2],location[0][11],'laser')
                     location[1][8]=0
                     t=0
                     location[1][3]-=1
                     action=True
                 elif difficulty==1 and t>=.6 and not location[1][3]==0 and not (location[1][2]==None or location[1][2]=='block')and location[1][8]==250:
-                    lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20])
+                    at(location[0][10][2],location[0][11],'laser')
                     location[1][8]=0
                     t=0
                     location[1][3]-=1
@@ -486,7 +486,7 @@ while True:
                            if location[0][7]==450:
                                 location[0][5]=False
                         else:
-                            at(location[0][10][6],location[0][11],'normal'
+                            at(location[0][10][6],location[0][11],'normal')
                 if difficulty=='PvP' and location[1][11][0]==0:
                     if event.key==K_a:
                         location[1][5]=True
