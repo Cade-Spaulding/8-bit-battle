@@ -166,14 +166,16 @@ darkRed=(100,0,0)
 darkGreen=(0,50,0)
 darkBlue=(0,0,100)
 orenge=(255,120,0)
-#      character formating   [name,colors,gun attack,anti air,strike,kick,punch,HP,jump strength,speed]
-#      jun formtion          [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
-#      anti air format       [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
-#      strike formating      [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
-#      nutral formating      [damage,start up,active,endlag,y knockback,x knockback,hitstun,range]
+#      character formating                      [name,colors,gun attack,anti air,strike,kick,punch,HP,jump strength,speed]
+#      jun formtion                             [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
+#      anti air format                          [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
+#      strike formating                         [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
+#      nutral formating                         [damage,start up,active,endlag,y knockback,x knockback,hitstun,range]
 characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,72,.35,.1,.18,.59,65],[3,16,1,5,.9,.9,19,188],[1,7,2,5,.55,.43,25,31],6.25,1.25,.5],
             ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,198],[1,10,4,22,.6,1.5,18,12],5.5,1.675,.688],
-            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,380,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58],'TBD','TBD']
+            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,380,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58],
+            ['BOT MAN',[red,darkRed,grey,grey,darkBlue],[3,.97,'hi',.08,25,462,[darkGreen,darkGreen],1.6,2.4,43],[5,46,22,76,.8,2.6,52,52,34],[2,1.5,.1.95,52,254,.116,.328,.675,.05,63],[4,25,2,31,1.8,2.67,35,106],[3,15,5,18,.9,2.6,31,25],6.25,1.545,.438],
+            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,380,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58]]
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
 pause=False
@@ -478,6 +480,13 @@ while True:
                         if not location[0][2]=='block' and not location[0][2]==None and location[0][11][0]==0:
                            at(location[0][10][4],location[0][11],'strike')
                            location[0][5]=False
+                    if event.key==K_m and not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0:
+                        if location[0][5]:
+                           at(location[0][10][5],location[1][11],'normal')
+                           if location[0][7]==450:
+                                location[0][5]=False
+                        else:
+                            at(location[0][10][6],location[0][11],'normal'
                 if difficulty=='PvP' and location[1][11][0]==0:
                     if event.key==K_a:
                         location[1][5]=True
@@ -683,7 +692,7 @@ while True:
             textRect.centerx=420
             textRect.centery=300
             windowSurface.blit(text,textRect)
-        if not mode=='select':
+        if not mode=='select' and not choise=='char1' and not choise=='char2':
             if choise==4:
                 text=basicFont.render('back',True,black,yellow)
             else:
@@ -717,28 +726,60 @@ while True:
             textRect.centerx=420
             textRect.centery=300
             windowSurface.blit(text,textRect)
+            if choise==4:
+                text=basicFont.render(characters[4][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[4][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=210
+            textRect.centery=450
+            windowSurface.blit(text,textRect)
+            if choise==1:
+                text=basicFont.render(characters[4][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[4][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=300
+            textRect.centery=450
+            windowSurface.blit(text,textRect)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type==QUIT:
                     pygame.quit()
                     sys.exit()
             if event.type==KEYDOWN:
-                if event.key==K_LEFT:
-                    if choise==3 or choise==4:
-                        choise-=1
-                    else:
-                        choise=1
-                if event.key==K_RIGHT:
-                    if choise==1 or choise==2:
-                        choise+=1
-                    elif not mode=='select':
-                        choise=4
-                    else:
-                        choise=3
+                if not (mode=='char1' or mode=='char2'):
+                    if event.key==K_LEFT:
+                        if choise==3 or choise==4:
+                            choise-=1
+                        else:
+                            choise=1
+                    if event.key==K_RIGHT:
+                        if choise==1 or choise==2:
+                            choise+=1
+                        elif not mode=='select':
+                            choise=4
+                        else:
+                            choise=3
+                else:
+                    if event.key==K_LEFT:
+                        if choise==3 or choise==2 or choise==5:
+                           choise-=1
+                    if event.key==K_RIGHT:
+                        if choise==1 or choise==2 or choise==4:
+                            choise+=1
+                    if event.key==K_UP:
+                        if choise==4 or choise==5:
+                            choise-=3
+                    if event.key==K_DOWN:
+                        if choise==1:
+                            choise=4
+                        else:
+                            choise=5
                 if event.key==K_RETURN:
                     ti=0
                     if mode=='char1':
-                        if not choise==4:
+                        if not choise==5:
                             location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
                             mode='char2'
                             choise=1
