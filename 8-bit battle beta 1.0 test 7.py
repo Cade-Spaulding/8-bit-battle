@@ -693,7 +693,7 @@ while True:
             textRect.centerx=420
             textRect.centery=300
             windowSurface.blit(text,textRect)
-        if (not mode=='select') and (not choise=='char1') and (not choise=='char2'):
+        if (not mode=='select') and (not mode=='char1') and (not mode=='char2'):
             if choise==4:
                 text=basicFont.render('back',True,black,yellow)
             else:
@@ -733,15 +733,15 @@ while True:
                 text=basicFont.render(characters[3][0],True,blue,white)
             textRect=text.get_rect()
             textRect.centerx=210
-            textRect.centery=450
+            textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==5:
                 text=basicFont.render(characters[4][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[4][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=300
-            textRect.centery=450
+            textRect.centerx=410
+            textRect.centery=350
             windowSurface.blit(text,textRect)
         pygame.display.update()
         for event in pygame.event.get():
