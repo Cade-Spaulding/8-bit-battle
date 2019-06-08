@@ -177,7 +177,8 @@ characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,
             ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,198],[1,10,4,22,.6,1.5,18,12],5.5,1.675,.688],
             ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,290,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58],
             ['BOT MAN',[red,darkRed,grey,grey,darkBlue],[3,.97,'hi',.08,25,462,[darkGreen,darkGreen],1.6,2.4,43],[5,46,22,76,.8,2.6,52,52,34],[2,1.5,1.95,52,254,.116,.328,.675,.05,63],[4,25,2,31,1.8,2.67,35,106],[3,15,5,18,.9,2.6,31,25],6.25,1.545,.438],
-            ['police',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35],[3,19,10,97,1.6,.35,41,97,57],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18],[3,18,3,5,.78,.431,56,98],[3,9,4,9,.4,.01,14,23],8.75,1.1,.29]]
+            ['police',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35],[3,19,10,97,1.6,.35,41,97,57],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18],[3,18,3,5,.78,.431,56,98],[3,9,4,9,.4,.01,14,23],8.75,1.1,.29],
+            ['BOT BOY',[darkBlue,darkBlue,grey,grey,red],[5,2.3,'hi',0.0001,9,300,[red,red],.88,.51,56],[1,15,7,22,0.9,2.6,9,2,15],[3,.5,.75,26,92,1.6,2.1,0.5,1.2,18],[4,21,5,13,1.4,1.4,19,22],[2,18,4,26,.8,2.6,5,29]
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
 pause=False
@@ -733,7 +734,7 @@ while True:
             else:
                 text=basicFont.render(characters[3][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=210
+            textRect.centerx=140
             textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==5:
@@ -741,7 +742,15 @@ while True:
             else:
                 text=basicFont.render(characters[4][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=410
+            textRect.centerx=280
+            textRect.centery=350
+            windowSurface.blit(text,textRect)
+            if choise==6:
+                text=basicFont.render(characters[5][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[5][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=420
             textRect.centery=350
             windowSurface.blit(text,textRect)
         pygame.display.update()
@@ -765,19 +774,17 @@ while True:
                             choise=3
                 else:
                     if event.key==K_LEFT:
-                        if choise==3 or choise==2 or choise==5:
+                        if not choise==4 or choise==1:
                            choise-=1
                     if event.key==K_RIGHT:
-                        if choise==1 or choise==2 or choise==4:
+                        if not choise==3 or choise==6:
                             choise+=1
                     if event.key==K_UP:
-                        if choise==4 or choise==5:
+                        if choise>3:
                             choise-=3
                     if event.key==K_DOWN:
-                        if choise==1:
-                            choise=4
-                        else:
-                            choise=5
+                        if choise<=3:
+                            choise+=3
                 if event.key==K_RETURN:
                     ti=0
                     if mode=='char1':
