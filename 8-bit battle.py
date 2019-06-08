@@ -104,6 +104,12 @@ def atac(location):
                     normal.append([location[0][0],'man',location[0][7]+20,location[0][11][1],location[0][2]])
                 else:
                     normal.append([location[1][0],'AI',location[1][7]+20,location[1][11][1],location[1][2]])
+            if loc[11][1]==loc[10][10] and loc[11][0]<=loc[11][1][2]+loc[11][1][3] and loc[11][0]>=loc[11][1][3]:
+                if loc[2]=='L':
+                    loc[0]-=loc[11][1][3]
+                else:
+                    loc[0]+=loc[11][1][3]
+       
 def at(attack,stun,types):
     stun[1]=attack
     if types=='laser':
@@ -112,6 +118,8 @@ def at(attack,stun,types):
         stun[0]=attack[1]+attack[2]+attack[3]
     elif types=='strike':
         stun[0]=-1
+    elif types=='dash':
+        stun[0]=attack[0]+attack[1]+attack[2]
 def createGuy(person):
     if pause:
         if person[1]=='man' or not person[10]==location[0][10]:
@@ -173,14 +181,15 @@ sky=(0,255,255)
 #      anti air format                          [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
 #      strike formating                         [damage,y speed,x speed,startup,endlag,y bounce,x bounce,y knockback,x knockback,hitstun]
 #      nutral formating                         [damage,start up,active,endlag,y knockback,x knockback,hitstun,range]
-characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,57,.35,.1,.18,.59,65],[3,16,1,5,.9,.9,19,188],[1,7,2,5,.55,.43,25,31],6.25,1.25,.5],
-            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,198],[1,10,4,22,.6,1.5,18,12],5.5,1.675,.688],
-            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,290,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58],
-            ['BOT MAN',[red,darkRed,grey,grey,darkBlue],[3,.97,'hi',.08,25,462,[darkGreen,darkGreen],1.6,2.4,43],[5,46,22,76,.8,2.6,52,52,34],[2,1.5,1.95,52,254,.116,.328,.675,.05,63],[4,25,2,31,1.8,2.67,35,106],[3,15,5,18,.9,2.6,31,25],6.25,1.545,.438],
-            ['police',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35],[3,19,10,97,1.6,.35,41,97,57],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18],[3,18,3,5,.78,.431,56,98],[3,9,4,9,.4,.01,14,23],8.75,1.1,.29],
-            ['BOT BOY',[darkBlue,darkBlue,grey,grey,red],[5,2.3,'hi',0.0001,9,300,[red,red],.88,.51,56],[1,15,7,22,0.9,2.6,9,2,15],[3,.5,.75,26,92,1.6,2.1,0.5,1.2,18],[4,21,5,13,1.4,1.4,19,22],[2,18,4,26,.8,2.6,5,29],7.25,1.198,.53]]
+#      dash format                              [startup,active,endlag,speed]
+characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,57,.35,.1,.18,.59,65],[3,16,1,5,.9,.9,19,188],[1,7,2,5,.55,.43,25,31],6.25,1.25,.5,[15,52,6,1.2]],
+            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,198],[1,10,4,22,.6,1.5,18,12],5.5,1.675,.688,[2,46,4,2.1]],
+            ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,290,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58,[1,33,16,1.35]],
+            ['BOT MAN',[red,darkRed,grey,grey,darkBlue],[3,.97,'hi',.08,25,462,[darkGreen,darkGreen],1.6,2.4,43],[5,46,22,76,.8,2.6,52,52,34],[2,1.5,1.95,52,254,.116,.328,.675,.05,63],[4,25,2,31,1.8,2.67,35,106],[3,15,5,18,.9,2.6,31,25],6.25,1.545,.438,[21,61,0,.62]],
+            ['police',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35],[3,19,10,97,1.6,.35,41,97,57],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18],[3,18,3,5,.78,.431,56,98],[3,9,4,9,.4,.01,14,23],8.75,1.1,.29,[6,27,2,.51]],
+            ['BOT BOY',[darkBlue,darkBlue,grey,grey,red],[5,2.3,'hi',0.0001,9,300,[red,red],.88,.51,56],[1,15,7,22,0.9,2.6,9,2,15],[3,.5,.75,26,92,1.6,2.1,0.5,1.2,18],[4,21,5,13,1.4,1.4,19,22],[2,18,4,26,.8,2.6,5,29],7.25,1.198,.53,[3,26,2,.97]]]
 t=0
-location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
+location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None],0],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None],0]]
 pause=False
 inAGame=False
 end=False
@@ -230,7 +239,7 @@ while True:
                         pause=False
                         inAGame=False
                         pc='continue'
-                        location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None]],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None]]]
+                        location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None],0],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None],0]]
         storyMode=False
     if inAGame and not end and not pause:
         strike=[]
@@ -325,6 +334,7 @@ while True:
                 x[2]=x[2]+x[5][3]
         death=False
         for n in location:
+            n[12]-=1
             if n[2]=='block':
                 if n[4]>=n[10][7]:
                     n[2]=None
@@ -458,10 +468,14 @@ while True:
                         Lift=True
                         location[0][5]=True
                         location[0][2]='L'
+                        if location[0][12]>0 and location[0][7]==450:
+                            at(location[0][10][10],location[0][11],'dash')
                     if event.key==K_RIGHT:
                         Lift=True
                         location[0][5]=True
                         location[0][2]='R'
+                        if location[0][12]>0 and location[0][7]==450:
+                            at(location[0][10][10],location[0][11],'dash')
                     if event.key==K_SPACE:
                        if not location[0][2]=='block' and not location[0][2]==None and location[0][11][0]==0:
                            at(location[0][10][2],location[0][11],'laser')
@@ -526,8 +540,10 @@ while True:
             if event.type==KEYUP:
                 if event.key==K_LEFT and location[0][2]=='L' and not Lift:
                     location[0][5]=False
+                    location[0][12]=15
                 if event.key==K_RIGHT and location[0][2]=='R' and not Lift:
                     location[0][5]=False
+                    location[0][12]=15
                 if difficulty=='PvP':
                     if event.key==K_a and location[1][2]=='L' and not Lift:
                         location[1][5]=False
@@ -788,11 +804,11 @@ while True:
                 if event.key==K_RETURN:
                     ti=0
                     if mode=='char1':
-                            location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                            location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None],0]
                             mode='char2'
                             choise=1
                     elif mode=='char2':
-                            location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None]]
+                            location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None],0]
                             difficulty='PvP'
                             mode='select'
                             choise=1
