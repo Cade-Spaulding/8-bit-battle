@@ -41,7 +41,7 @@ def strikeHit(person,check,die):
     die[0]=False
     die[1]=None
 def antiAirHit(person,check,die):
-    if not person[2]=='block' and (person[7] <= check[2]-check[3][7]):
+    if not person[2]=='block' and (person[7] >= check[2]-check[3][7]):
             person[9]-=check[3][0]
             person[11][0]=check[3][6]
             person[11][1]=['stun',check[3][5],check[3][4]]
