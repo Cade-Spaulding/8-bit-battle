@@ -555,7 +555,7 @@ while True:
                         else:
                             at(location[0][10][6],location[0][11],'normal')
                     if event.key==K_k and not location[0][2]=='block' and not location[0][3]<=0 and not location[0][2]==None and location[0][11][0]==0:
-                           at(location[0][10][5],location[0][11],'grab')
+                           at(location[0][10][11],location[0][11],'grab')
                            if location[0][7]==450:
                                 location[0][5]=False
                 if difficulty=='PvP' and location[1][11][0]==0:
