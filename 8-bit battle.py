@@ -199,8 +199,8 @@ darkBlue=(0,0,100)
 orenge=(255,120,0)
 brown=(128,63,0)
 sky=(0,128,255)
-lightBlue(0,255,255)
-tan(255,255,127)
+lightBlue=(0,255,255)
+tan=(255,255,127)
 #      character formating                      [name,colors,gun attack,anti air,strike,kick,punch,HP,jump strength,speed,dash,grab]
 #      jun formtion                             [damage,speed,crash check,decay speed,startup,endlag,colors,y knockback,x knockback,hit stun]
 #      anti air format                          [damage,start up,active,endlag,y knockback,x knockback,hitstun,y size,x size]
