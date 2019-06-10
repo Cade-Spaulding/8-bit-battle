@@ -142,7 +142,7 @@ def at(attack,stun,types):
     elif types=='dash':
         stun[0]=attack[0]+attack[1]+attack[2]
     elif types=='grab':
-        stun[0]=attack[0]+attack[1]+attack[4]
+        stun[0]=attack[1]+attack[2]+attack[4]
 def createGuy(person):
     if pause:
         if person[1]=='man' or not person[10]==location[0][10]:
@@ -440,7 +440,7 @@ while True:
         for check in grab:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+25 and person[0]>=check[0] and not check[1]==person[1]:
+                    if person[0]<=check[0]+100 and person[0]>=check[0] and not check[1]==person[1]:
                         location[0][11][1]=['stun',0,0]
                         if (person[7] <= check[2] and check[2] < person[7]+25):
                             location[0][11][0]=check[3][4]
@@ -452,7 +452,7 @@ while True:
                             dead=die[1]
                         
                 else:
-                    if person[0]>=check[0]-25 and person[0]<=check[0] and not check[1]==person[1]:
+                    if person[0]>=check[0]-100 and person[0]<=check[0] and not check[1]==person[1]:
                         location[0][11][1]=['stun',0,0]
                         if (person[7] <= check[2] and check[2] < person[7]+25):
                             location[0][11][0]=check[3][4]
