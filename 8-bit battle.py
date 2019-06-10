@@ -92,7 +92,7 @@ def atac(location):
                 elif loc[11][1]==loc[10][4]:
                     loc[11]=[loc[11][1][4],['stun',-loc[11][1][6],loc[11][1][5]]]
             loc[11][0]-=1
-            if loc[11][1][0]=='stun':
+            if loc[11][1][0]=='stun' or loc[11][1][0]=='KD-air':
                 loc[0]-=loc[11][1][1]
                 loc[7]-=loc[11][1][2]
             if loc[11][1]==loc[10][2] and loc[11][0]==loc[11][1][5]:
