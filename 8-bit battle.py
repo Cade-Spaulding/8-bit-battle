@@ -454,6 +454,9 @@ while True:
                 else:
                     if person[0]>=check[0]-25 and person[0]<=check[0] and not check[1]==person[1]:
                         location[0][11][1]=['stun',0,0]
+                        if (person[7] <= check[2] and check[2] < person[7]+25):
+                            location[0][11][0]=check[3][4]
+                            location[0][11][0]=check[3][4]
                         location[1][11][1]=['stun',0,0]
                         grabHit(person,check,die)
                         death=die[0]
