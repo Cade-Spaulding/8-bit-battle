@@ -122,9 +122,9 @@ def atac(location):
                     normal.append([location[1][0],'AI',location[1][7]+20,location[1][11][1],location[1][2]])
             if (loc[11][1]==loc[10][11]) and loc[11][0]>=loc[11][1][4] and loc[11][0]<=loc[11][1][4]+loc[11][1][2]:
                 if loc[1]=='man':
-                    grab.append([location[0][0],'man',location[0][7]+20,location[0][11][1],location[0][2]])
+                    grab.append([location[0][0],'man',location[0][7],location[0][11][1],location[0][2]])
                 else:
-                    grab.append([location[1][0],'AI',location[1][7]+20,location[1][11][1],location[1][2]])
+                    grab.append([location[1][0],'AI',location[1][7],location[1][11][1],location[1][2]])
             if loc[11][1]==loc[10][10] and loc[11][0]<=loc[11][1][1]+loc[11][1][2] and loc[11][0]>=loc[11][1][2]:
                 if loc[2]=='L':
                     loc[0]-=loc[11][1][3]
