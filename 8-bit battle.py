@@ -16,7 +16,8 @@ antiAir=[]
 strike=[]
 normal=[]
 def laserHit(person,check,die):
-    if not person[2]=='block' and (person[7] <= check[4] and check[4] <= person[7]+50):
+    if (person[7] <= check[4] and check[4] <= person[7]+50):
+        if not person[2]=='block':
             person[9]-=check[5][0]
             person[11][0]=check[5][9]
             person[11][1]=['stun',check[5][8],check[5][7]]
@@ -26,6 +27,8 @@ def laserHit(person,check,die):
                 die[0]=True
                 die[1]=person[1]
                 return None
+        else:
+            person[11][0]=check[3][10]
     die[0]=False
     die[1]=None
 def strikeHit(person,check,die):
@@ -39,10 +42,13 @@ def strikeHit(person,check,die):
                 die[0]=True
                 die[1]=person[1]
                 return None
+    else:
+        person[11][0]=check[3][10]
     die[0]=False
     die[1]=None
 def antiAirHit(person,check,die):
-    if not person[2]=='block' and (person[7] >= check[2]-check[3][7]):
+    if  (person[7] >= check[2]-check[3][7]):
+        if not person[2]=='block':
             person[9]-=check[3][0]
             person[11][0]=check[3][6]
             person[11][1]=['stun',check[3][5],check[3][4]]
@@ -52,10 +58,13 @@ def antiAirHit(person,check,die):
                 die[0]=True
                 die[1]=person[1]
                 return None
+        else:
+            person[11][0]=check[3][9]
     die[0]=False
     die[1]=None
 def normalHit(person,check,die):
-    if not person[2]=='block' and (person[7] <= check[2] and check[2] < person[7]+25):
+    if (person[7] <= check[2] and check[2] < person[7]+25):
+        if not person[2]=='block':
             person[9]-=check[3][0]
             person[11][0]=check[3][6]
             person[11][1]=['stun',check[3][5],check[3][4]]
@@ -65,10 +74,13 @@ def normalHit(person,check,die):
                 die[0]=True
                 die[1]=person[1]
                 return None
+        else:
+            person[11][0]=check[3][8]
     die[0]=False
     die[1]=None
 def grabHit(person,check,die):
     if (person[7] <= check[2] and check[2] < person[7]+25):
+            person[2]=None
             person[7]=check[2]
             person[0]=check[0]
             person[9]-=check[3][0]
@@ -91,7 +103,12 @@ def atac(location):
                     loc[11]=[loc[11][1][4],['stun',loc[11][1][6],loc[11][1][5]]]
                 elif loc[11][1]==loc[10][4]:
                     loc[11]=[loc[11][1][4],['stun',-loc[11][1][6],loc[11][1][5]]]
-            loc[11][0]-=1
+            if not loc[11][1][0]=='KD-air':
+                loc[11][0]-=1
+                if loc[11][1][0]=='KD' and loc[11][0]==0:
+                    loc[11][1][0]='stun'
+            if loc[11][1][0]=='KD-air' and loc[7]==450:
+                loc[11][1]=['KD',0,0]
             if loc[11][1][0]=='stun' or loc[11][1][0]=='KD-air':
                 loc[0]-=loc[11][1][1]
                 loc[7]-=loc[11][1][2]
@@ -208,13 +225,14 @@ tan=(255,255,127)
 #      nutral formating                         [damage,start up,active,endlag,y knockback,x knockback,hitstun,range]
 #      dash format                              [startup,active,endlag,speed]
 #      grab format                              [damage,startup,active,endlag-succsess,endlag-whif,y knockback,x knockback,knockdown time]
-characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10],[3,19,7,78,.8,.2,10,50,32],[2,.6,.6,15,57,.35,.1,.18,.59,65],[3,16,1,5,.9,.9,19,188],[1,7,2,5,.55,.43,25,31],6.25,1.25,.5,[15,104,6,1.2],[3,37,12,5,62,1.6,1.6,30]],
-            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17],[2,25,7,52,1.2,.5,15,35,53],[3,1.2,.39,20,80,.25,.6,.24,.7,72],[2,15,3,19,.8,1.3,20,198],[1,10,4,22,.6,1.5,18,12],5.5,1.675,.688,[2,92,4,2.1],[2,26,19,1,106,1.2,1.3,22]],
+characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,220,[green,darkGreen],.5,.3,10,10],[3,19,7,78,.8,.2,10,50,32,3],[2,.6,.6,15,57,.35,.1,.18,.59,65,5],[3,16,1,5,.9,.9,19,188,3],[1,7,2,5,.55,.43,25,31,7],6.25,1.25,.5,[15,104,6,1.2],[3,37,12,5,62,1.6,1.6,30]],
+            ['quin',[grey,grey,blue,darkBlue,black],[1,1.5,'hi',.005,7,150,[blue,darkBlue],1,.5,17,45],[2,25,7,52,1.2,.5,15,35,53,41],[3,1.2,.39,20,80,.25,.6,.24,.7,72,66],[2,15,3,19,.8,1.3,20,198,15],[1,10,4,22,.6,1.5,18,12,20],5.5,1.675,.688,[2,92,4,2.1],[2,26,19,1,106,1.2,1.3,22]],
             ['bit man v.2',[yellow,orenge,orenge,orenge,grey],[3,.6,'hi',.001,10,290,[yellow,orenge],1.2,.8,20],[2,15,6,36,.8,.75,12,30,61],[2,.8,.5,14,48,.22,.56,.55,.2,61],[2,7,5,16,.6,.3,22,205],[2,5,6,15,.5,.32,13,52],2.75,1.35,.58,[1,132,16,1.35],[2,21,22,3,65,.5,1.0,25]],
             ['BOT MAN',[red,darkRed,grey,grey,darkBlue],[3,.97,'hi',.08,25,462,[darkGreen,darkGreen],1.6,2.4,43],[5,46,22,76,.8,2.6,52,52,34],[2,1.5,1.95,52,254,.116,.328,.675,.05,63],[4,25,2,31,1.8,2.67,35,106],[3,15,5,18,.9,2.6,31,25],6.25,1.545,.438,[21,122,0,.62],[4,33,4,5,98,.89,2.0,56]],
             ['police',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35],[3,19,10,97,1.6,.35,41,97,57],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18],[3,18,3,5,.78,.431,56,98],[3,9,4,9,.4,.01,14,23],8.75,1.1,.29,[6,103,2,.51],[2,26,19,1,106,1,1.25,102]],
             ['BOT BOY',[darkBlue,darkBlue,grey,grey,red],[5,2.3,'hi',0.0001,9,300,[red,red],.88,.51,56],[1,15,7,22,0.9,2.6,9,2,15],[3,.5,.75,26,92,1.6,2.1,0.5,1.2,18],[4,21,5,13,1.4,1.4,19,22],[2,18,4,26,.8,2.6,5,29],7.25,1.198,.53,[3,97,2,.97],[1,52,6,15,200,1.5,1,27]],
-            ['grunt',[yellow,orenge,tan,tan,lightBlue],[2,1.1,'hi',0.005,13,150,[black,black],.56,.82,35],[4,26,8,35,0.9,9.8,13,46,48],[2,.67,.67,52,90,1.6,0,.5,1.2,19],[3,31,3,15,.8,1.7,6,50],[1,5,13,25,.9,1.9,20,10],7.5,1.4,.34,[14,52,30,1.6],[6,30,3,1,180,.8,1.3,56]]]
+            ['grunt',[yellow,orenge,tan,tan,lightBlue],[2,1.1,'hi',0.005,13,150,[black,black],.56,.82,35],[4,26,8,35,0.9,9.8,13,46,48],[2,.67,.67,52,90,1.6,0,.5,1.2,19],[3,31,3,15,.8,1.7,6,50],[1,5,13,25,.9,1.9,20,10],7.5,1.4,.34,[14,52,30,1.6],[6,30,3,1,180,.8,1.3,56]],
+            ['porta',[orenge,orenge,yellow,yellow,brown],[2,1.3,'hi',0.01,22,310,[orenge,orenge],.72,.13,51],[3,25,3,46,1.6,6.2,19,21,23],[1,100,1,100,100,1,1.2,.25,.65,23],[4,36,2,116,.97,.77,13,102],[2,19,2,31,1,.8,19,15],4.25,1.5,.32,[100,1,100,100],[3,25,2,6,202,.5,.96,62]]]
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None],0],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None],0]]
 pause=False
@@ -372,7 +390,7 @@ while True:
                 n[4]=n[4]-.035
         for check in lasers:
             for person in location:
-                if person[0]>=check[0]-5 and person[0]<=check[0]+5 and not check[3]==person[1]:
+                if person[0]>=check[0]-5 and person[0]<=check[0]+5 and not check[3]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                     laserHit(person,check,die)
                     death=die[0]
                     if death:
@@ -381,7 +399,7 @@ while True:
         for check in antiAir:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+check[3][8] and person[0]>=check[0] and not check[1]==person[1]:
+                    if person[0]<=check[0]+check[3][8] and person[0]>=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         antiAirHit(person,check,die)
@@ -390,7 +408,7 @@ while True:
                             dead=die[1]
                         
                 else:
-                    if person[0]>=check[0]-check[3][8] and person[0]<=check[0] and not check[1]==person[1]:
+                    if person[0]>=check[0]-check[3][8] and person[0]<=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         antiAirHit(person,check,die)
@@ -401,7 +419,7 @@ while True:
             for person in location:
                 for pernon in location:
                     if check[4]=='L' and not pernon==person:
-                        if person[0]<=check[0] and person[0]>=check[0]-50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
+                        if person[0]<=check[0] and person[0]>=check[0]-50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                             if pernon[11][1]==pernon[10][4] and pernon[2]=='L':
                                 pernon[11]=[pernon[11][1][4],['stun',-pernon[11][1][6],pernon[11][1][5]]]
                             elif pernon[11][1]==pernon[10][4]:
@@ -412,7 +430,7 @@ while True:
                                 dead=die[1]
 
                     elif not pernon==person:
-                        if person[0]>=check[0] and person[0]<=check[0]+50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7]:
+                        if person[0]>=check[0] and person[0]<=check[0]+50 and not check[1]==person[1] and check[2]+5>person[7] and check[2]-5<person[7] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                             if pernon[11][1]==pernon[10][4] and pernon[2]=='R':
                                 pernon[11]=[pernon[11][1][4],['stun',pernon[11][1][6],pernon[11][1][5]]]
                             elif pernon[11][1]==pernon[10][4]:
@@ -424,7 +442,7 @@ while True:
         for check in normal:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1]:
+                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         normalHit(person,check,die)
@@ -433,7 +451,7 @@ while True:
                             dead=die[1]
                         
                 else:
-                    if person[0]>=check[0]-check[3][7] and person[0]<=check[0] and not check[1]==person[1]:
+                    if person[0]>=check[0]-check[3][7] and person[0]<=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         normalHit(person,check,die)
@@ -443,7 +461,7 @@ while True:
         for check in grab:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+100 and person[0]>=check[0] and not check[1]==person[1]:
+                    if person[0]<=check[0]+100 and person[0]>=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                         location[0][11][1]=['stun',0,0]
                         if (person[7] <= check[2] and check[2] < person[7]+25):
                             location[0][11][0]=check[3][3]
@@ -455,7 +473,7 @@ while True:
                             dead=die[1]
                         
                 else:
-                    if person[0]>=check[0]-100 and person[0]<=check[0] and not check[1]==person[1]:
+                    if person[0]>=check[0]-100 and person[0]<=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
                         location[0][11][1]=['stun',0,0]
                         if (person[7] <= check[2] and check[2] < person[7]+25):
                             location[0][11][0]=check[3][3]
@@ -566,10 +584,14 @@ while True:
                         location[1][5]=True
                         location[1][2]='L'
                         Lift=True
+                        if location[1][12]>0 and location[1][7]==450:
+                            at(location[1][10][10],location[1][11],'dash')
                     if event.key==K_d:
                         location[1][5]=True
                         location[1][2]='R'
                         Lift=True
+                        if location[1][12]>0 and location[1][7]==450:
+                            at(location[1][10][10],location[1][11],'dash')
                     if event.key==K_TAB:
                        if not location[1][2]=='block' and not location[0][2]==None and location[1][11][0]==0:
                            at(location[1][10][2],location[1][11],'laser')
@@ -594,6 +616,10 @@ while True:
                         location[1][6]=location[1][10][8]
                     if event.key==K_s and location[1][4]<=0:
                         location[1][2]='block'
+                    if event.key==K_3 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
+                           at(location[1][10][11],location[1][11],'grab')
+                           if location[1][7]==450:
+                                location[1][5]=False
             if event.type==KEYUP:
                 if event.key==K_LEFT and location[0][2]=='L' and not Lift:
                     location[0][5]=False
@@ -604,8 +630,10 @@ while True:
                 if difficulty=='PvP':
                     if event.key==K_a and location[1][2]=='L' and not Lift:
                         location[1][5]=False
+                        location[1][12]=15
                     if event.key==K_d and location[1][2]=='R' and not Lift:
                         location[1][5]=False
+                        location[1][12]=15
         for movement in location:
             if not movement[11][1]==movement[10][4]:
                 if movement[5]:
