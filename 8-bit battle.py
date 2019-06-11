@@ -894,7 +894,7 @@ while True:
                         if not choise==4 and not choise==1:
                            choise-=1
                     if event.key==K_RIGHT:
-                        if not choise==3 and not choise==6 and not choise==9:
+                        if not choise==3 and not choise==6 and not choise==8:
                             choise+=1
                     if event.key==K_UP:
                         if choise>3:
