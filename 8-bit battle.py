@@ -28,7 +28,7 @@ def laserHit(person,check,die):
                 die[1]=person[1]
                 return None
         else:
-            person[11][0]=check[3][10]
+            person[11][0]=check[5][10]
     die[0]=False
     die[1]=None
 def strikeHit(person,check,die):
