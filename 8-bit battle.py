@@ -862,7 +862,7 @@ while True:
             textRect.centerx=200
             textRect.centery=420
             windowSurface.blit(text,textRect)
-            if choise==7:
+            if choise==8:
                 text=basicFont.render(characters[7][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[7][0],True,blue,white)
@@ -894,7 +894,7 @@ while True:
                         if not choise==4 and not choise==1:
                            choise-=1
                     if event.key==K_RIGHT:
-                        if not choise==3 and not choise==6:
+                        if not choise==3 and not choise==6 and not choise==9:
                             choise+=1
                     if event.key==K_UP:
                         if choise>3:
