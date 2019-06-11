@@ -29,6 +29,7 @@ def laserHit(person,check,die):
                 return None
         else:
             person[11][0]=check[5][10]
+            person[11][1]=['shield',0,0]
     die[0]=False
     die[1]=None
 def strikeHit(person,check,die):
@@ -44,6 +45,7 @@ def strikeHit(person,check,die):
                 return None
     else:
         person[11][0]=check[3][10]
+        person[11][1]=['shield',0,0]
     die[0]=False
     die[1]=None
 def antiAirHit(person,check,die):
@@ -60,6 +62,7 @@ def antiAirHit(person,check,die):
                 return None
         else:
             person[11][0]=check[3][9]
+            person[11][1]=['shield',0,0]
     die[0]=False
     die[1]=None
 def normalHit(person,check,die):
@@ -76,6 +79,7 @@ def normalHit(person,check,die):
                 return None
         else:
             person[11][0]=check[3][8]
+            person[11][1]=['shield',0,0]
     die[0]=False
     die[1]=None
 def grabHit(person,check,die):
@@ -905,11 +909,11 @@ while True:
                 if event.key==K_RETURN:
                     ti=0
                     if mode=='char1':
-                            location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None],0]
+                            location[0]=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,[None]],0]
                             mode='char2'
                             choise=1
                     elif mode=='char2':
-                            location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,None],0]
+                            location[1]=[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[choise-1],[0,[None]],0]
                             difficulty='PvP'
                             mode='select'
                             choise=1
