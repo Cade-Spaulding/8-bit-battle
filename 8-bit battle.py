@@ -236,7 +236,11 @@ characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,
             ['police',[brown,brown,grey,grey,blue],[2,1.45,'hi',.003,15,426,[darkBlue,darkBlue],1.67,.98,35,22],[3,19,10,97,1.6,.35,41,97,57,52],[2,.25,1.2,5,19,.12,1.1,1.3,.98,18,15],[3,18,3,5,.78,.431,56,98,1],[3,9,4,9,.4,.01,14,23,11],8.75,1.1,.29,[6,103,2,.51],[2,26,19,1,106,1,1.25,102]],
             ['BOT BOY',[darkBlue,darkBlue,grey,grey,red],[5,2.3,'hi',0.0001,9,300,[red,red],.88,.51,56,49],[1,15,7,22,0.9,2.6,9,2,15,3],[3,.5,.75,26,92,1.6,2.1,0.5,1.2,18,15],[4,21,5,13,1.4,1.4,19,22,10],[2,18,4,26,.8,2.6,5,29,5],7.25,1.198,.53,[3,97,2,.97],[1,52,6,15,200,1.5,1,27]],
             ['grunt',[yellow,orenge,tan,tan,lightBlue],[2,1.1,'hi',0.005,13,150,[black,black],.56,.82,35,12],[4,26,8,35,0.9,9.8,13,46,48,44],[2,.67,.67,52,90,1.6,0,.5,1.2,19,18],[3,31,3,15,.8,1.7,6,50,2],[1,5,13,25,.9,1.9,20,10,20],7.5,1.4,.34,[14,52,30,1.6],[6,30,3,1,180,.8,1.3,56]],
-            ['porta',[orenge,orenge,yellow,yellow,brown],[2,1.3,'hi',0.01,22,310,[orenge,orenge],.72,.13,51,9],[3,25,3,46,1.6,6.2,19,21,23,19],[1,100,50,100,100,1,1.2,.25,.65,23,15],[4,36,2,116,.97,.77,13,102,11],[2,19,2,31,1,.8,19,15,15],4.25,1.5,.32,[100,1,100,100],[3,25,2,6,202,.5,.96,62]]]
+            ['porta',[orenge,orenge,yellow,yellow,brown],[2,1.3,'hi',0.01,22,310,[orenge,orenge],.72,.13,51,9],[3,25,3,46,1.6,6.2,19,21,23,19],[1,100,50,100,100,1,1.2,.25,.65,23,15],[4,36,2,116,.97,.77,13,102,11],[2,19,2,31,1,.8,19,15,15],4.25,1.5,.32,[100,1,100,100],[3,25,2,6,202,.5,.96,62]],
+            ['foot',[tan,tan,green,darkGreen,red],[1,.05,'hi',.01,21,210,[grey,grey],0,0,100,15],[2,22,5,100,.6,1.35,30,56,22,3],[3,.2,1.3,10,100,.24,2.1,-.24,2.1,18,15],[5,15,8,17,.12,1,15,101,14],[2,7,9,16,.06,0.2,19,56,15],6.5,1.2,.61,[5,82,17,1.5],[3,12,25,4,60,.6,1.0,99]],
+            ['max',[darkGreen,darkGreen,red,red,grey],[3,1.1,'hi',0.0035,9,210,[white,white],.45,.31,20,18],[2,18,8,99,.5,.5,55,18,62,0],[1,.7,.7,10,70,.54,0,.9,1.2,70,10],[2,20,2,18,.6,.67,17,201,10],[1,12,5,2,.35,.2,12,101,1],5.75,1.24,.52,[12,80,3,1.1],[2,29,13,6,75,1.75,1.75,52]],
+            ['glasy',[white,grey,red,red,yellow],[3,1.2,'hi',0.002,13,101,[red,red],.56,.82,29,15],[6,30,10,35,1,7.6,22,6,48,10],[4,1,0,18,200,.6,9.2,.5,1.2,0,0],[6,18,8,14,.8,1.7,16,102,15],[3,12,3,19,1.1,1.6,10,22,8],2.5,1.15,.44,[1,25,23,2.1],[5,25,6,9,200,.9,1.6,62]],
+            ['trickster',[yellow,orenge,brown,brown,red],[0,1.9,'hi',0.001,18,100,[black,black],.67,.67,51,50],[5,30,15,60,.54,.1,77,18,30,2],[2,1.2,-.36,1,100,.25,.98,.1,.01,93,4],[3,14,2,21,1.8,1.25,25,150,30],[2,9,8,8,.9,1.6,25,12,16],5.5,1.75,.65,[1,100,60,2.7],[3,30,16,2,99,1.1,1.4,30]]]
 t=0
 location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None],0],[150,'AI','R',25,0,False,0,450,250,5,characters[0],[0,None],0]]
 pause=False
@@ -816,63 +820,95 @@ while True:
                 text=basicFont.render(characters[0][0],True,blue,white)
             textRect=text.get_rect()
             textRect.centerx=140
-            textRect.centery=320
+            textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==2:
                 text=basicFont.render(characters[1][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[1][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=280
-            textRect.centery=320
+            textRect.centerx=190
+            textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==3:
                 text=basicFont.render(characters[2][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[2][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=420
-            textRect.centery=320
+            textRect.centerx=240
+            textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==4:
                 text=basicFont.render(characters[3][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[3][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=140
-            textRect.centery=370
+            textRect.centerx=280
+            textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==5:
                 text=basicFont.render(characters[4][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[4][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=280
-            textRect.centery=370
+            textRect.centerx=140
+            textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==6:
                 text=basicFont.render(characters[5][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[5][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=420
-            textRect.centery=370
+            textRect.centerx=190
+            textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==7:
                 text=basicFont.render(characters[6][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[6][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=200
-            textRect.centery=420
+            textRect.centerx=240
+            textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==8:
                 text=basicFont.render(characters[7][0],True,blue,yellow)
             else:
                 text=basicFont.render(characters[7][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=300
-            textRect.centery=420
+            textRect.centerx=280
+            textRect.centery=350
+            windowSurface.blit(text,textRect)
+            if choise==9:
+                text=basicFont.render(characters[8][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[8][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=140
+            textRect.centery=400
+            windowSurface.blit(text,textRect)
+            if choise==10:
+                text=basicFont.render(characters[9][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[9][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=190
+            textRect.centery=400
+            windowSurface.blit(text,textRect)
+            if choise==11:
+                text=basicFont.render(characters[10][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[10][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=240
+            textRect.centery=400
+            windowSurface.blit(text,textRect)
+            if choise==12:
+                text=basicFont.render(characters[11][0],True,blue,yellow)
+            else:
+                text=basicFont.render(characters[11][0],True,blue,white)
+            textRect=text.get_rect()
+            textRect.centerx=280
+            textRect.centery=400
             windowSurface.blit(text,textRect)
         pygame.display.update()
         for event in pygame.event.get():
@@ -894,18 +930,37 @@ while True:
                         else:
                             choise=3
                 else:
-                    if event.key==K_LEFT:
-                        if not choise==4 and not choise==1:
+                    key=left
+                    if mode=='char1':
+                        if event.key==K_LEFT:
+                            key=left
+                        elif event.key==K_RIGHT:
+                            key=right
+                        if event.key==UP:
+                            key=up
+                        elif event.key==K_DOWN:
+                            key=down
+                    if mode=='char2':
+                        if event.key==K_a:
+                            key=left
+                        elif event.key==K_d:
+                            key=right
+                        if event.key==w:
+                            key=up
+                        elif event.key==K_s:
+                            key=down
+                    if key==left:
+                        if not choise==5 and not choise==1 and not choise==9:
                            choise-=1
-                    if event.key==K_RIGHT:
-                        if not choise==3 and not choise==6 and not choise==8:
+                    if key==right:
+                        if not choise==4 and not choise==12 and not choise==8:
                             choise+=1
-                    if event.key==K_UP:
-                        if choise>3:
-                            choise-=3
-                    if event.key==K_DOWN:
-                        if choise<=5:
-                            choise+=3
+                    if key==up:
+                        if choise>4:
+                            choise-=4
+                    if key==down:
+                        if choise<=8:
+                            choise+=4
                 if event.key==K_RETURN:
                     ti=0
                     if mode=='char1':
