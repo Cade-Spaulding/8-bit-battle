@@ -1117,7 +1117,7 @@ while True:
                 if event.key==K_RETURN:
                     end=False
                     inAGame=False
-                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None]],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None]]]
+                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
                     lasers=[]
     for event in pygame.event.get():
         if event.type==QUIT:
