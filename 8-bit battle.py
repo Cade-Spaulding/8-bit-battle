@@ -827,7 +827,7 @@ while True:
             else:
                 text=basicFont.render(characters[1][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=190
+            textRect.centerx=240
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==3:
@@ -835,7 +835,7 @@ while True:
             else:
                 text=basicFont.render(characters[2][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=240
+            textRect.centerx=340
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==4:
@@ -843,7 +843,7 @@ while True:
             else:
                 text=basicFont.render(characters[3][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=280
+            textRect.centerx=440
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==5:
@@ -859,7 +859,7 @@ while True:
             else:
                 text=basicFont.render(characters[5][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=190
+            textRect.centerx=240
             textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==7:
@@ -867,7 +867,7 @@ while True:
             else:
                 text=basicFont.render(characters[6][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=240
+            textRect.centerx=340
             textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==8:
@@ -875,7 +875,7 @@ while True:
             else:
                 text=basicFont.render(characters[7][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=280
+            textRect.centerx=440
             textRect.centery=350
             windowSurface.blit(text,textRect)
             if choise==9:
@@ -891,7 +891,7 @@ while True:
             else:
                 text=basicFont.render(characters[9][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=190
+            textRect.centerx=240
             textRect.centery=400
             windowSurface.blit(text,textRect)
             if choise==11:
@@ -899,7 +899,7 @@ while True:
             else:
                 text=basicFont.render(characters[10][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=240
+            textRect.centerx=340
             textRect.centery=400
             windowSurface.blit(text,textRect)
             if choise==12:
@@ -907,7 +907,7 @@ while True:
             else:
                 text=basicFont.render(characters[11][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=280
+            textRect.centerx=480
             textRect.centery=400
             windowSurface.blit(text,textRect)
         pygame.display.update()
@@ -930,7 +930,7 @@ while True:
                         else:
                             choise=3
                 else:
-                    key=left
+                    key=None
                     if mode=='char1':
                         if event.key==K_LEFT:
                             key=left
@@ -945,7 +945,7 @@ while True:
                             key=left
                         elif event.key==K_d:
                             key=right
-                        if event.key==w:
+                        if event.key==K_w:
                             key=up
                         elif event.key==K_s:
                             key=down
