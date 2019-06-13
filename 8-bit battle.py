@@ -659,15 +659,15 @@ while True:
             location[0][3]=25
             location[1][3]=25
         for up in location:
-            text=basicFont.render(str(up[3]),True,black,white)
-            textRect=text.get_rect()
-            if up[1]=='man':
-                textRect.centerx=650
-            else:
-                textRect.centerx=50
-            textRect.centery=100
-            windowSurface.blit(text,textRect)
-            text=basicFont.render(str(up[9]),True,black,white)
+            #text=basicFont.render(str(up[3]),True,black,white)
+            #textRect=text.get_rect()
+            #if up[1]=='man':
+             #   textRect.centerx=650
+            #else:
+             #   textRect.centerx=50
+            #textRect.centery=100
+           # windowSurface.blit(text,textRect)
+            text=basicFont.render(str(up[9]),True,black,sky)
             textRect=text.get_rect()
             if up[1]=='man':
                 textRect.centerx=650
