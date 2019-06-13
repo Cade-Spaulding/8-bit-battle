@@ -85,7 +85,7 @@ def normalHit(person,check,die):
 def grabHit(person,check,die):
     if (person[7] <= check[2] and check[2] < person[7]+25):
             person[2]=None
-            person[7]=check[2]
+            person[7]=check[2]-10
             person[0]=check[0]
             person[9]-=check[3][0]
             person[11][0]=check[3][7]
@@ -116,6 +116,7 @@ def atac(location):
             if loc[11][1][0]=='stun' or loc[11][1][0]=='KD-air':
                 loc[0]-=loc[11][1][1]
                 loc[7]-=loc[11][1][2]
+                loc[11][1][2]-=.01
             if loc[11][1]==loc[10][2] and loc[11][0]==loc[11][1][5]:
                 if loc[1]=='man':
                     lasers.append([location[0][0],location[0][2],0,'man',location[0][7]+20,location[0][10][2]])
@@ -827,7 +828,7 @@ while True:
             else:
                 text=basicFont.render(characters[1][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=240
+            textRect.centerx=250
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==3:
@@ -835,7 +836,7 @@ while True:
             else:
                 text=basicFont.render(characters[2][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=360
+            textRect.centerx=380
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==4:
@@ -843,7 +844,7 @@ while True:
             else:
                 text=basicFont.render(characters[3][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=480
+            textRect.centerx=500
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==5:
