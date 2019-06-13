@@ -936,7 +936,7 @@ while True:
                             key=left
                         elif event.key==K_RIGHT:
                             key=right
-                        if event.key==UP:
+                        if event.key==K_UP:
                             key=up
                         elif event.key==K_DOWN:
                             key=down
@@ -1117,7 +1117,7 @@ while True:
                 if event.key==K_RETURN:
                     end=False
                     inAGame=False
-                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,2)],[0,None]]]
+                    location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None]],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None]]]
                     lasers=[]
     for event in pygame.event.get():
         if event.type==QUIT:
