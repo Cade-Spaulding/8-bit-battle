@@ -930,35 +930,35 @@ while True:
                         else:
                             choise=3
                 else:
-                    key=None
+                    keys=None
                     if mode=='char1':
                         if event.key==K_LEFT:
-                            key=left
+                            keys='left'
                         elif event.key==K_RIGHT:
-                            key=right
+                            keys='right'
                         if event.key==K_UP:
-                            key=up
+                            keys='up'
                         elif event.key==K_DOWN:
-                            key=down
+                            keys='down'
                     if mode=='char2':
                         if event.key==K_a:
-                            key=left
+                            keys='left'
                         elif event.key==K_d:
-                            key=right
+                            keys='right'
                         if event.key==K_w:
-                            key=up
+                            keys='up'
                         elif event.key==K_s:
-                            key=down
-                    if key==left:
+                            keys='down'
+                    if keys=='left':
                         if not choise==5 and not choise==1 and not choise==9:
                            choise-=1
-                    if key==right:
+                    if keys=='right':
                         if not choise==4 and not choise==12 and not choise==8:
                             choise+=1
-                    if key==up:
+                    if keys=='up':
                         if choise>4:
                             choise-=4
-                    if key==down:
+                    if keys=='down':
                         if choise<=8:
                             choise+=4
                 if event.key==K_RETURN:
