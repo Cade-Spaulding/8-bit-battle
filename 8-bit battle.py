@@ -293,7 +293,7 @@ while True:
                         pause=False
                         inAGame=False
                         pc='continue'
-                        location=[[550,'man','L',25,0,False,0,450,250,5,characters[0],[0,None],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[0],[None]],0]
+                        location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,[None]],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
         storyMode=False
     if inAGame and not end and not pause:
         grab=[]
