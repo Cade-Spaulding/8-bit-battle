@@ -243,7 +243,7 @@ characters=[['bit man v.1',[blue,darkBlue,red,darkRed,orenge],[2,1,'hi',.002,10,
             ['glasy',[white,grey,red,red,yellow],[3,1.2,'hi',0.002,13,101,[red,red],.56,.82,29,15],[6,30,10,35,1,7.6,22,6,48,10],[4,1,0,18,200,.6,9.2,.5,1.2,0,0],[6,18,8,14,.8,1.7,16,102,15],[3,12,3,19,1.1,1.6,10,22,8],2.5,1.15,.44,[1,25,23,2.1],[5,25,6,9,200,.9,1.6,62]],
             ['trickster',[yellow,orenge,brown,brown,red],[0,1.9,'hi',0.001,18,100,[black,black],.67,.67,51,50],[5,30,15,60,.54,.1,77,18,30,2],[2,1.2,-.36,1,100,.25,.98,.1,.01,93,4],[3,14,2,21,1.8,1.25,25,150,30],[2,9,8,8,.9,1.6,25,12,16],5.5,1.75,.65,[1,100,60,2.7],[3,30,16,2,99,1.1,1.4,30]]]
 t=0
-location=[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,[None]],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
+location=[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,[None]],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
 pause=False
 inAGame=False
 end=False
