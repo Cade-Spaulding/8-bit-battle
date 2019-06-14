@@ -320,7 +320,7 @@ while True:
             laserNeer=False
             for laser in lasers:
                 if laser[3]=='man':
-                    if laser[0]-location[1][0]<0 and laser[0]-location[1][0]>-50 and laser[1]=='L' and laser[4]<400
+                    if laser[0]-location[1][0]<0 and laser[0]-location[1][0]>-50 and laser[1]=='L' and laser[4]<400:
                         laserNeer=True
                     if laser[0]-location[1][0]>0 and laser[0]-location[1][0]<50 and laser[1]=='R' and laser[4]<400:
                         laserNeer=True
