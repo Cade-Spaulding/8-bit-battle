@@ -920,6 +920,8 @@ while True:
                     sys.exit()
             if event.type==KEYDOWN:
                 if not (mode=='char1' or mode=='char2'):
+                    location==[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,[None]],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
+
                     if event.key==K_LEFT:
                         if choise==3 or choise==4:
                             choise-=1
