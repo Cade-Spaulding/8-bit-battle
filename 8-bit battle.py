@@ -347,7 +347,7 @@ while True:
                    at(location[1][10][2],location[1][11],'laser')
                    #lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20]
                    ori[1]=15
-            if if location[0][7]<350 and location[1][7]==450 and distance<50
+            if location[0][7]<350 and location[1][7]==450 and distance<50:
                 if not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0 and location[1][7]==450:
                    at(location[1][10][3],location[1][11],'antiAir')
                    location[1][5]=False
@@ -370,10 +370,10 @@ while True:
                    at(location[1][10][11],location[1][11],'grab')
                    if location[1][7]==450:
                         location[1][5]=False
-            if if distance<50 and location[1][2]=='L' and not Lift:
+            if distance<50 and location[1][2]=='L' and not Lift:
                     location[1][5]=False
                     location[1][12]=15
-            if if distance<50 and location[1][2]=='R' and not Lift:
+            if distance<50 and location[1][2]=='R' and not Lift:
                     location[1][5]=False
                     location[1][12]=15
         for x in lasers:
