@@ -493,7 +493,7 @@ while True:
                 if perkon[8]<250:
                     perkon[8]+=1
         if death==True:
-             location==[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,[None]],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
+            location==[[550,'man','L',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,[None]],0],[150,'AI','R',25,0,False,0,450,250,characters[0][7],characters[random.randint(0,11)],[0,None],0]]
             if not difficulty=='PvP':
            
                 if dead=='AI':
