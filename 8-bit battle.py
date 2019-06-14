@@ -316,72 +316,66 @@ while True:
             else:
                 l[0]=l[0]-l[5][1]
             pygame.draw.line(windowSurface,l[5][6][0],(l[0],l[4]),(l[0]-25,l[4]))
-        if not difficulty=='PvP':
-            action=False
-            qwerty=True
-            for lazer in lasers:
-                if (lazer[0]-50<location[1][0] and lazer[0]+50>location[1][0]) and lazer[3]=='man':
-                    qwerty=False
-                if (lazer[0]-50<location[1][0] and lazer[0]+50>location[1][0]) and lazer[3]=='man' and (t>=((10-difficulty)/30)):
-                    if location[1][4]<=.25:
-                        location[1][2]='block'
-                        action=True
-                    if location[1][4]>.25 and difficulty>=7 and lazer[0]-50<location[1][0] and location[1][0]==450:
-                        location[1][6]=1
-                        action=True
-                    if location[0][6]==location[1][6]:
-                        location[1][2]='block'
-                        action=True
-                    if not location[0][6]==0 and not location[1][6]==0:
-                        location[1][2]='block'
-                        action=True
-            if  not location[0][0]-location[1][0]>25*(10-difficulty) and action==False and (t>=.2 or t>=((10-difficulty)/20)) and not location[1][0]<=70:
-                location[1][2]='L'
+        if not difficulty=='PvP' and location[1][11][0]==0:
+            laserNeer=False
+            for laser in lasers:
+                if laser[3]=='man':
+                    if laser[0]-location[1][0]<0 and laser[0]-location[1][0]>-50 and laser[1]=='L' and laser[4]<400
+                        laserNeer=True
+                    if laser[0]-location[1][0]>0 and laser[0]-location[1][0]<50 and laser[1]=='R' and laser[4]<400:
+                        laserNeer=True
+            distance=max(location[0][0]-location[1][0],location[1][0]-location[0][0])
+            direction='L'
+            if location[0][0]>=location[1][0]:
+                direction='R'
+            if (distance>100 and distance<200 and not (location[1][5]==True or location[1][2]==direction))or laserNeer:
                 location[1][5]=True
-                t=0
-                action==True
-            elif location[0][0]-location[1][0]>25*(10-difficulty)+150 and action==False and (t>=.2 or t>=(((10-difficulty)/20))+.5) or (t>=1.75 and not difficulty>=3 and not difficulty<=7):
-                t=0
+                location[1][2]=direction
+                Lift=True
+                if location[1][12]>0 and location[1][7]==450:
+                    at(location[1][10][10],location[1][11],'dash')
+            if distance>50 and distance<100 and location[1][5]==True and location[0][11][0]==0 and location[1][2]==direction:
+                location[1][5]=True
                 location[1][2]='R'
-                location[1][5]=True
-                action=True
-            elif location[0][0]-location[1][0]>25*(10-difficulty)+150 and action==False and (t>=.2 or t>=(((10-difficulty)/20))+.5) or (t>=1.25 and difficulty==1):
-                t=0
-                location[1][2]='R'
-                location[1][5]=True
-                action=True
-            elif (((t>=.5 or ((t>=((((10-difficulty))/20))+.3)))) and(( action==False or location[0][4]==0))) :
-                if location[1][2]=='L':
-                    location[1][2]='R'
-                    location[1][5]=True
-                    action==True
-                    t=0
-                elif (not difficulty==1) and (not location[1][3]==0) and not(location[1][2]==None or location[1][2]=='block') and (t>=.5 or t>=(((10-difficulty)/20))+.3)and location[1][8]==250:
-                    at(location[1][10][2],location[1][11],'laser')
-                    location[1][8]=0
-                    t=0
-                    location[1][3]-=1
-                    action=True
-                elif difficulty==1 and t>=.6 and not location[1][3]==0 and not (location[1][2]==None or location[1][2]=='block')and location[1][8]==250:
-                    at(location[1][10][2],location[1][11],'laser')
-                    location[1][8]=0
-                    t=0
-                    location[1][3]-=1
-                elif t>=.7:
+                if direction=='R':
                     location[1][2]='L'
-                    location[1][5]=True
-                    action=True
-                    t=0 
-            if location[1][5] and t>=.2 or (location[1][0]<=70 and location[1][2]=='L') or (location[1][0]>=630 and location[1][2]=='R'):
-                location[1][5]=False
-            if location[1][7]==450 and (not location[1][2]=='block') and location[1][0]+100>=location[0][0] and location[1][0]-100<=location[0][0]:
-                location[1][6]=1
-            t=t+.002
-            ti+=1
-            if location[1][4]>=4.5 and location[1][2]=='block' and qwerty:
-                location[1][2]='R'
-                location[1][5]=True
-            qwerty=True
+                Lift=True
+                if location[1][12]>0 and location[1][7]==450:
+                    at(location[1][10][10],location[1][11],'dash')
+            if distance>200 and not laserNeer:
+               if not location[1][2]=='block' and not location[0][2]==None and location[1][11][0]==0:
+                   at(location[1][10][2],location[1][11],'laser')
+                   #lasers.append([location[1][0],location[1][2],0,'AI',location[1][7]+20]
+                   ori[1]=15
+            if if location[0][7]<350 and location[1][7]==450 and distance<50
+                if not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0 and location[1][7]==450:
+                   at(location[1][10][3],location[1][11],'antiAir')
+                   location[1][5]=False
+            elif not location[1][7]==450 and distance>100 and distance<200 and location[1][6]==0:
+                if not location[1][2]=='block' and not location[1][2]==None and location[1][11][0]==0:
+                   at(location[1][10][4],location[1][11],'strike')
+                   location[1][5]=False
+            if distance<100 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
+                if location[1][5]:
+                   at(location[1][10][5],location[1][11],'normal')
+                   if location[1][7]==450:
+                        location[1][5]=False
+                else:
+                    at(location[1][10][6],location[1][11],'normal')
+            if laserNeer and location[1][7]==450:
+                location[1][6]=location[1][10][8]
+            if not location[0][11][0]==0 and distance<50 and location[1][4]<=0:
+                location[1][2]='block'
+            if location[0][2]=='block' and distance<100 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
+                   at(location[1][10][11],location[1][11],'grab')
+                   if location[1][7]==450:
+                        location[1][5]=False
+            if if distance<50 and location[1][2]=='L' and not Lift:
+                    location[1][5]=False
+                    location[1][12]=15
+            if if distance<50 and location[1][2]=='R' and not Lift:
+                    location[1][5]=False
+                    location[1][12]=15
         for x in lasers:
             if x[2]>=1:
                 lasers.remove(x)
