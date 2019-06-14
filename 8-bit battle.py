@@ -355,7 +355,7 @@ while True:
                 if not location[1][2]=='block' and not location[1][2]==None and location[1][11][0]==0:
                    at(location[1][10][4],location[1][11],'strike')
                    location[1][5]=False
-            if direction=location[1][2] and distance<100 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
+            if direction==location[1][2] and distance<100 and not location[1][2]=='block' and not location[1][3]<=0 and not location[1][2]==None and location[1][11][0]==0:
                 if location[1][5]:
                    at(location[1][10][5],location[1][11],'normal')
                    if location[1][7]==450:
