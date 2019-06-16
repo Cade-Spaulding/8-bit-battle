@@ -671,8 +671,11 @@ while True:
             #else:
              #   textRect.centerx=50
             #textRect.centery=100
-           # windowSurface.blit(text,textRect)
-            text=basicFont.render(str(up[9]),True,black,sky)
+            # windowSurface.blit(text,textRect)
+            HP=up[9]
+            if HP<=0:
+                HP='!!'
+            text=basicFont.render(str(HP),True,black,sky)
             textRect=text.get_rect()
             if up[1]=='man':
                 textRect.centerx=650
