@@ -819,7 +819,7 @@ while True:
             else:
                 text=basicFont.render('back',True,black,white)
             textRect=text.get_rect()
-            textRect.centerx=550
+            textRect.centerx=500
             textRect.centery=300
             windowSurface.blit(text,textRect)
         if mode=='char1' or mode=='char2':
@@ -852,7 +852,7 @@ while True:
             else:
                 text=basicFont.render(characters[3][0],True,blue,white)
             textRect=text.get_rect()
-            textRect.centerx=580
+            textRect.centerx=590
             textRect.centery=300
             windowSurface.blit(text,textRect)
             if choise==5:
