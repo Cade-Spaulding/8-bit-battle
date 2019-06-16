@@ -494,8 +494,11 @@ while True:
                             dead=die[1]
         for perkon in location:
                 if (perkon[0]<50 or perkon[0]>680) and perkon[7]==450:
-                    death=True
-                    dead=perkon[1]
+                    #death=True
+                    #dead=perkon[1]
+                    perkon[0]=345
+                    perkon[11]=[60,['KD-air',0,0]]
+                    perkon[9]-=5
                 if perkon[8]<250:
                     perkon[8]+=1
         if death==True:
