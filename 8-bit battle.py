@@ -324,7 +324,7 @@ while True:
                         laserNeer=True
                     if laser[0]-location[1][0]>0 and laser[0]-location[1][0]<50 and laser[1]=='R' and laser[4]<400:
                         laserNeer=True
-            distance=max(location[0][0]-location[1][0],location[1][0]-location[0][0])
+            distance=max(location[0][0]-location[1][0],location[1][0]-location[0][0])*difficulty/3
             direction='L'
             if location[0][0]>=location[1][0]:
                 direction='R'
@@ -334,7 +334,7 @@ while True:
                 Lift=True
                 if location[1][12]>0 and location[1][7]==450:
                     at(location[1][10][10],location[1][11],'dash')
-            if (distance>50 and distance<100 and location[1][5]==True and location[0][11][0]==0 and location[1][2]==direction) or (location[1][2]=='block' and location[0][11][0]==0):
+            if (distance>50 and distance<100 and location[1][5]==True and location[0][11][0]==0 and location[1][2]==direction) or (location[1][2]=='block' and location[0][11][0]==0) or (location[1][0]<150 and location[1][2]=='L')or (location[1][0]>550 and location[1][2]=='R'):
                 location[1][5]=True
                 location[1][2]='R'
                 if direction=='R':
