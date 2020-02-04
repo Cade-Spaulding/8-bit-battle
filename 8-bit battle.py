@@ -660,7 +660,7 @@ while True:
             if movement[7]>=450:
                     movement[6]=0
                     if movement[7]>=500:
-                    movement[11]=[0,None]
+                        movement[11]=[0,None]
                     movement[7]=450
         if location[0][3]==0 and location[1][3]==0:
             location[0][3]=25
