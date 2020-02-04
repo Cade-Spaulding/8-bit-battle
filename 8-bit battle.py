@@ -334,7 +334,7 @@ while True:
                 Lift=True
                 if location[1][12]>0 and location[1][7]==450:
                     at(location[1][10][10],location[1][11],'dash')
-            if (distance>50 and distance<100 and location[1][5]==True and location[0][11][0]==0 and location[1][2]==direction) or (location[1][2]=='block' and location[0][11][0]==0) or (location[1][0]<150 and location[1][2]=='L')or (location[1][0]>550 and location[1][2]=='R'):
+            if (distance>50 and distance<100 and location[1][5]==True and location[0][11][0]==0 and location[1][2]==direction) or (location[1][2]=='block' and location[0][11][0]==0) or (location[1][0]<150 and location[1][2]=='R')or (location[1][0]>550 and location[1][2]=='L'):
                 location[1][5]=True
                 location[1][2]='R'
                 if direction=='R':
