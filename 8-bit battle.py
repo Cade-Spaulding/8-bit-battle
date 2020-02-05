@@ -451,7 +451,7 @@ while True:
         for check in normal:
             for person in location:
                 if check[4]=='R':
-                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD' and not person[11][1][0]=='strike
+                    if person[0]<=check[0]+check[3][7] and person[0]>=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD' and not person[11][1][0]=='strike':
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         normalHit(person,check,die)
@@ -460,7 +460,7 @@ while True:
                             dead=die[1]
                         
                 else:
-                    if person[0]>=check[0]-check[3][7] and person[0]<=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD':
+                    if person[0]>=check[0]-check[3][7] and person[0]<=check[0] and not check[1]==person[1] and not person[11][1][0]=='KD-air' and not person[11][1][0]=='KD' and not person[11][1][0]=='strike':
                         location[0][11][1]=['stun',0,0]
                         location[1][11][1]=['stun',0,0]
                         normalHit(person,check,die)
